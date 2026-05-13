@@ -1,0 +1,9 @@
+{
+    "failure": {
+        "network": "Connection problem",
+        "unauthorized": "Unauthorized access",
+        "server": "Server error",
+        "not_found": "Not found",
+        "unknown": "Unknown error"
+    }
+}
