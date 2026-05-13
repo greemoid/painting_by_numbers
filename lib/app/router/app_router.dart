@@ -11,7 +11,7 @@ import 'package:paiting_by_numbers/core/feature/feature_module.dart';
 
 final class _GoRouterRefreshStream extends ChangeNotifier {
   _GoRouterRefreshStream(Stream<dynamic> stream) {
-    _subscription = stream.asBroadcastStream().listen((_) {
+    _subscription = stream.listen((_) {
       notifyListeners();
     });
   }

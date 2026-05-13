@@ -2,11 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paiting_by_numbers/app/router/app_router.dart';
 import 'package:paiting_by_numbers/resources/gen/assets.gen.dart';
-
-// TODO: Обов'язково переконайтеся, що у вашому проєкті визначено AppRouter з static navigatorKey,
-// або замініть AppRouter.navigatorKey на ваш актуальний GlobalKey<NavigatorState>.
-// Оскільки в paiting_by_numbers AppRouter не знайдено, я закоментував імпорт.
 
 class CustomSnackBar {
   static OverlayEntry? _currentOverlay;
@@ -73,7 +70,6 @@ class CustomSnackBar {
   }) {
     _removeCurrent();
 
-    // Логіка отримання контексту згідно з ms_finance
     final context = _getNavigatorContext();
     if (context == null) return;
 
@@ -137,9 +133,7 @@ class CustomSnackBar {
   }
 
   static BuildContext? _getNavigatorContext() {
-    // Тут має бути ваш navigatorKey. Наприклад:
-    // return AppRouter.navigatorKey.currentContext;
-    return null; // Тимчасовий заповнювач для уникнення помилок статики
+    return AppRouter.navigatorKey.currentContext;
   }
 
   static Future<void> _dismissWithAnimation() async {
@@ -202,7 +196,6 @@ class _SnackBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Власна реалізація кнопки закриття (замість GhostIconButton)
     final closeButton = GestureDetector(
       onTap: onClose,
       behavior: HitTestBehavior.opaque,
@@ -211,7 +204,7 @@ class _SnackBarWidget extends StatelessWidget {
         child: Icon(
           Icons.close,
           size: 16.r,
-          color: textColor.withOpacity(0.5),
+          color: textColor.withValues(alpha: 0.5),
         ),
       ),
     );
@@ -266,10 +259,11 @@ class _SnackBarWidget extends StatelessWidget {
                               children: [
                                 Text(
                                   title!,
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: textColor,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: textColor,
+                                      ),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -286,9 +280,9 @@ class _SnackBarWidget extends StatelessWidget {
                       ),
                     Text(
                       message,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: textColor,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: textColor),
                     ),
                   ],
                 ),
