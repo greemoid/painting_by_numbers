@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paiting_by_numbers/app/app_flow/app_flow_cubit.dart';
 import 'package:paiting_by_numbers/app/router/app_flow_routes.dart';
 import 'package:paiting_by_numbers/app/router/flow_placeholder_screen.dart';
-import 'package:paiting_by_numbers/app/app_flow/app_flow_cubit.dart';
 import 'package:paiting_by_numbers/core/app_flow/app_flow.dart';
 import 'package:paiting_by_numbers/core/di/locator.dart';
 import 'package:paiting_by_numbers/core/feature/feature_module.dart';
@@ -44,6 +44,13 @@ final class AppRouter {
         ShellRoute(
           builder: (context, state, child) => child,
           routes: <RouteBase>[
+            /// Placeholder route for auth screen
+            GoRoute(
+              path: AppFlowRoutes.signIn,
+              builder: (context, state) =>
+                  const FlowPlaceholderScreen(label: 'Sign In Screen'),
+            ),
+
             /// Placeholder route for main screen
             GoRoute(
               path: AppFlowRoutes.home,
