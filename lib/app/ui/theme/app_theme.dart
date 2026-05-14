@@ -364,6 +364,16 @@ class AppTheme {
     final baseTheme = isDark ? ThemeData.dark() : ThemeData.light();
 
     return baseTheme.copyWith(
+      colorScheme: baseTheme.colorScheme.copyWith(
+        primary: colorScheme.primary,
+        onPrimary: colorScheme.primaryForeground,
+        secondary: colorScheme.secondary,
+        onSecondary: colorScheme.secondaryForeground,
+        error: colorScheme.destructive,
+        onError: colorScheme.destructiveForeground,
+        surface: colorScheme.background,
+        onSurface: colorScheme.foreground,
+      ),
       scaffoldBackgroundColor: colorScheme.background,
       tabBarTheme: TabBarThemeData(
         overlayColor: WidgetStateProperty.resolveWith<Color?>((
