@@ -5,5 +5,31 @@
         "server": "Server error",
         "not_found": "Not found",
         "unknown": "Unknown error"
+    },
+    "auth": {
+        "sign_in": "Sign In",
+        "sign_in_title": "Welcome back",
+        "sign_in_subtitle": "Sign in to continue your creative journey",
+        "sign_up": "Sign Up",
+        "sign_up_title": "Create an account",
+        "sign_up_subtitle": "Join us and start painting your masterpieces",
+        "forgot_password_title": "Reset password",
+        "forgot_password_subtitle": "Enter your email to receive a password reset link",
+        "email": "Email",
+        "password": "Password",
+        "username": "Username",
+        "email_required": "Email is required",
+        "invalid_email": "Invalid email",
+        "password_required": "Password is required",
+        "password_min_length": "Password must be at least 6 characters",
+        "username_required": "Username is required",
+        "username_min_length": "Username must be at least 3 characters",
+        "or": "or",
+        "google_sign_in": "Continue with Google",
+        "dont_have_account": "Don't have an account?",
+        "already_have_account": "Already have an account?",
+        "forgot_password": "Forgot password?",
+        "send_reset_link": "Send reset link",
+        "back_to_sign_in": "Back to log in"
     }
 }

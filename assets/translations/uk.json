@@ -5,5 +5,31 @@
         "server": "Помилка сервера",
         "not_found": "Не знайдено",
         "unknown": "Невідома помилка"
+    },
+    "auth": {
+        "sign_in": "Увійти",
+        "sign_in_title": "З поверненням",
+        "sign_in_subtitle": "Увійдіть, щоб продовжити творчість",
+        "sign_up": "Зареєструватися",
+        "sign_up_title": "Створити акаунт",
+        "sign_up_subtitle": "Приєднуйтесь та створюйте власні шедеври",
+        "forgot_password_title": "Відновлення пароля",
+        "forgot_password_subtitle": "Введіть email, щоб отримати посилання для відновлення",
+        "email": "Email",
+        "password": "Пароль",
+        "username": "Ім'я",
+        "email_required": "Email обов'язковий",
+        "invalid_email": "Некоректний email",
+        "password_required": "Пароль обов'язковий",
+        "password_min_length": "Мінімум 6 символів",
+        "username_required": "Ім'я обов'язкове",
+        "username_min_length": "Мінімум 3 символи",
+        "or": "або",
+        "google_sign_in": "Продовжити з Google",
+        "dont_have_account": "Немає акаунту?",
+        "already_have_account": "Вже маєте акаунт?",
+        "forgot_password": "Забули пароль?",
+        "send_reset_link": "Надіслати посилання",
+        "back_to_sign_in": "Повернутися до входу"
     }
 }
