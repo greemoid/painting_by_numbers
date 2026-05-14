@@ -4,7 +4,15 @@
         "unauthorized": "Неавторизований доступ",
         "server": "Помилка сервера",
         "not_found": "Не знайдено",
-        "unknown": "Невідома помилка"
+        "unknown": "Невідома помилка",
+        "invalid_credential": "Невірний email або пароль",
+        "user_not_found": "Користувача з таким email не знайдено",
+        "wrong_password": "Невірний пароль",
+        "email_already_in_use": "Email вже використовується",
+        "user_disabled": "Користувача заблоковано",
+        "weak_password": "Занадто слабкий пароль",
+        "operation_not_allowed": "Операція недоступна",
+        "too_many_requests": "Занадто багато спроб. Спробуйте пізніше"
     },
     "auth": {
         "sign_in": "Увійти",

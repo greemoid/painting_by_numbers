@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "794737608140",
+    "project_id": "painting-by-numbers-181cd",
+    "storage_bucket": "painting-by-numbers-181cd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794737608140:android:2fb12f436f092794a88969",
+        "android_client_info": {
+          "package_name": "com.eliahu.paiting_by_numbers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794737608140-netlgfdfgu6spj120ktlvdgs2jb20ogu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8gIRrc-05q80uUMzBXZe7EheZKOJBG1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794737608140-netlgfdfgu6spj120ktlvdgs2jb20ogu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

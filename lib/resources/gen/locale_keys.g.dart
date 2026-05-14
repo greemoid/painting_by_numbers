@@ -8,6 +8,14 @@ abstract class  LocaleKeys {
   static const failure_server = 'failure.server';
   static const failure_not_found = 'failure.not_found';
   static const failure_unknown = 'failure.unknown';
+  static const failure_invalid_credential = 'failure.invalid_credential';
+  static const failure_user_not_found = 'failure.user_not_found';
+  static const failure_wrong_password = 'failure.wrong_password';
+  static const failure_email_already_in_use = 'failure.email_already_in_use';
+  static const failure_user_disabled = 'failure.user_disabled';
+  static const failure_weak_password = 'failure.weak_password';
+  static const failure_operation_not_allowed = 'failure.operation_not_allowed';
+  static const failure_too_many_requests = 'failure.too_many_requests';
   static const failure = 'failure';
   static const auth_sign_in = 'auth.sign_in';
   static const auth_sign_in_title = 'auth.sign_in_title';

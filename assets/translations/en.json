@@ -4,7 +4,15 @@
         "unauthorized": "Unauthorized access",
         "server": "Server error",
         "not_found": "Not found",
-        "unknown": "Unknown error"
+        "unknown": "Unknown error",
+        "invalid_credential": "Invalid email or password",
+        "user_not_found": "User with this email not found",
+        "wrong_password": "Wrong password",
+        "email_already_in_use": "Email already in use",
+        "user_disabled": "User disabled",
+        "weak_password": "Password is too weak",
+        "operation_not_allowed": "Operation not allowed",
+        "too_many_requests": "Too many requests. Try again later"
     },
     "auth": {
         "sign_in": "Sign In",
