@@ -50,7 +50,9 @@ class App extends StatelessWidget {
                     builder: (context, child) {
                       return ShadAppBuilder(
                         child: AnnotatedRegion<SystemUiOverlayStyle>(
-                          value: SystemUiStyle.main,
+                          value: Theme.of(context).brightness == Brightness.dark
+                              ? SystemUiStyle.dark
+                              : SystemUiStyle.light,
                           child: FailureListener(
                             child: child ?? const SizedBox.shrink(),
                           ),
