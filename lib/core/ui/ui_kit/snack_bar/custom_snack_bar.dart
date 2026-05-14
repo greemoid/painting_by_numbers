@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paiting_by_numbers/app/router/app_router.dart';
+import 'package:paiting_by_numbers/app/ui/theme/app_colors.dart';
 import 'package:paiting_by_numbers/resources/gen/assets.gen.dart';
 
 class _SnackBarRequest {
@@ -169,13 +170,20 @@ class CustomSnackBar {
     SvgGenImage? icon,
     bool hasCloseButton = true,
   }) {
+    final context = AppRouter.navigatorKey.currentContext;
+    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+
     _SnackBarManager.instance.show(
       _SnackBarRequest(
         title: title,
         message: message,
-        backgroundColor: const Color(0xFFFFFBEB),
-        borderColor: const Color(0xFFFEF3C7),
-        textColor: const Color(0xFF92400E),
+        backgroundColor: isDark
+            ? AppColors.warningBackgroundDark
+            : AppColors.warningBackgroundLight,
+        borderColor: isDark
+            ? AppColors.warningBorderDark
+            : AppColors.warningBorderLight,
+        textColor: isDark ? AppColors.warningTextDark : AppColors.warningTextLight,
         icon: icon,
         hasCloseButton: hasCloseButton,
       ),
@@ -187,13 +195,22 @@ class CustomSnackBar {
     required String message,
     SvgGenImage? icon,
   }) {
+    final context = AppRouter.navigatorKey.currentContext;
+    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+
     _SnackBarManager.instance.show(
       _SnackBarRequest(
         title: title,
         message: message,
-        backgroundColor: const Color(0xFFFEF2F2),
-        borderColor: const Color(0xFFFEE2E2),
-        textColor: const Color(0xFF991B1B),
+        backgroundColor: isDark
+            ? AppColors.destructiveBackgroundDark
+            : AppColors.destructiveBackgroundLight,
+        borderColor: isDark
+            ? AppColors.destructiveBorderDark
+            : AppColors.destructiveBorderLight,
+        textColor: isDark
+            ? AppColors.destructiveTextDark
+            : AppColors.destructiveTextLight,
         icon: icon,
       ),
     );
@@ -204,13 +221,20 @@ class CustomSnackBar {
     required String message,
     SvgGenImage? icon,
   }) {
+    final context = AppRouter.navigatorKey.currentContext;
+    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+
     _SnackBarManager.instance.show(
       _SnackBarRequest(
         title: title,
         message: message,
-        backgroundColor: const Color(0xFFF0FDF4),
-        borderColor: const Color(0xFFDCFCE7),
-        textColor: const Color(0xFF166534),
+        backgroundColor: isDark
+            ? AppColors.successBackgroundDark
+            : AppColors.successBackgroundLight,
+        borderColor: isDark
+            ? AppColors.successBorderDark
+            : AppColors.successBorderLight,
+        textColor: isDark ? AppColors.successTextDark : AppColors.successTextLight,
         icon: icon,
       ),
     );
