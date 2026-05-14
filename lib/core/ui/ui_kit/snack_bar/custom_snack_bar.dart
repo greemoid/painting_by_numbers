@@ -164,14 +164,18 @@ class _SnackBarManager {
 }
 
 class CustomSnackBar {
+  static bool get _isDark {
+    final context = AppRouter.navigatorKey.currentContext;
+    return context != null && Theme.of(context).brightness == Brightness.dark;
+  }
+
   static void showWarningSnackBar({
     String? title,
     required String message,
     SvgGenImage? icon,
     bool hasCloseButton = true,
   }) {
-    final context = AppRouter.navigatorKey.currentContext;
-    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+    final isDark = _isDark;
 
     _SnackBarManager.instance.show(
       _SnackBarRequest(
@@ -183,7 +187,9 @@ class CustomSnackBar {
         borderColor: isDark
             ? AppColors.warningBorderDark
             : AppColors.warningBorderLight,
-        textColor: isDark ? AppColors.warningTextDark : AppColors.warningTextLight,
+        textColor: isDark
+            ? AppColors.warningTextDark
+            : AppColors.warningTextLight,
         icon: icon,
         hasCloseButton: hasCloseButton,
       ),
@@ -195,8 +201,7 @@ class CustomSnackBar {
     required String message,
     SvgGenImage? icon,
   }) {
-    final context = AppRouter.navigatorKey.currentContext;
-    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+    final isDark = _isDark;
 
     _SnackBarManager.instance.show(
       _SnackBarRequest(
@@ -221,8 +226,7 @@ class CustomSnackBar {
     required String message,
     SvgGenImage? icon,
   }) {
-    final context = AppRouter.navigatorKey.currentContext;
-    final isDark = context != null && Theme.of(context).brightness == Brightness.dark;
+    final isDark = _isDark;
 
     _SnackBarManager.instance.show(
       _SnackBarRequest(
@@ -234,7 +238,9 @@ class CustomSnackBar {
         borderColor: isDark
             ? AppColors.successBorderDark
             : AppColors.successBorderLight,
-        textColor: isDark ? AppColors.successTextDark : AppColors.successTextLight,
+        textColor: isDark
+            ? AppColors.successTextDark
+            : AppColors.successTextLight,
         icon: icon,
       ),
     );
