@@ -21,13 +21,9 @@ import 'package:paiting_by_numbers/app/app_flow/session/session_initializer.dart
     as _i909;
 import 'package:paiting_by_numbers/app/app_flow/session/session_manager_impl.dart'
     as _i143;
-import 'package:paiting_by_numbers/app/app_flow/session/token_storage_impl.dart'
-    as _i223;
 import 'package:paiting_by_numbers/app/cubits/theme_cubit.dart' as _i802;
 import 'package:paiting_by_numbers/core/app_flow/session/session_manager.dart'
     as _i685;
-import 'package:paiting_by_numbers/core/app_flow/session/token_storage.dart'
-    as _i906;
 import 'package:paiting_by_numbers/core/di/firebase_module.dart' as _i83;
 import 'package:paiting_by_numbers/core/di/modules/app_module.dart' as _i787;
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart'
@@ -54,6 +50,12 @@ import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/sig
     as _i443;
 import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/watch_auth_state_use_case.dart'
     as _i750;
+import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/forgot_password/forgot_password_cubit.dart'
+    as _i709;
+import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/sign_in/sign_in_cubit.dart'
+    as _i581;
+import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/sign_up/sign_up_cubit.dart'
+    as _i693;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -73,18 +75,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i161.AppFlowCubit>(
       () => _i161.AppFlowCubit(gh<_i197.SessionCubit>()),
     );
-    gh.lazySingleton<_i906.TokenStorage>(
-      () => _i223.TokenStorageImpl(gh<_i558.FlutterSecureStorage>()),
-    );
-    gh.lazySingleton<_i685.SessionManager>(
-      () => _i143.SessionManagerImpl(
-        gh<_i197.SessionCubit>(),
-        gh<_i906.TokenStorage>(),
-      ),
-    );
-    gh.lazySingleton<_i909.SessionInitializer>(
-      () => _i909.SessionInitializer(gh<_i685.SessionManager>()),
-    );
     gh.lazySingleton<_i664.AuthService>(
       () => _i46.FirebaseAuthService(
         gh<_i59.FirebaseAuth>(),
@@ -94,14 +84,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i729.AuthRepository>(
       () => _i602.AuthRepositoryImpl(gh<_i664.AuthService>()),
     );
-    gh.factory<_i675.LogOutUseCase>(
-      () => _i675.LogOutUseCase(
-        gh<_i729.AuthRepository>(),
-        gh<_i685.SessionManager>(),
-      ),
-    );
     gh.factory<_i321.GetCurrentUserUseCase>(
       () => _i321.GetCurrentUserUseCase(gh<_i729.AuthRepository>()),
+    );
+    gh.factory<_i675.LogOutUseCase>(
+      () => _i675.LogOutUseCase(gh<_i729.AuthRepository>()),
     );
     gh.factory<_i602.SendPasswordResetLinkUseCase>(
       () => _i602.SendPasswordResetLinkUseCase(gh<_i729.AuthRepository>()),
@@ -117,6 +104,36 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i750.WatchAuthStateUseCase>(
       () => _i750.WatchAuthStateUseCase(gh<_i729.AuthRepository>()),
+    );
+    gh.factory<_i581.SignInCubit>(
+      () => _i581.SignInCubit(
+        gh<_i1064.SignInWithEmailUseCase>(),
+        gh<_i721.SignInWithGoogleUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
+    gh.factory<_i693.SignUpCubit>(
+      () => _i693.SignUpCubit(
+        gh<_i443.SignUpWithEmailUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
+    gh.lazySingleton<_i685.SessionManager>(
+      () => _i143.SessionManagerImpl(
+        gh<_i197.SessionCubit>(),
+        gh<_i750.WatchAuthStateUseCase>(),
+        gh<_i321.GetCurrentUserUseCase>(),
+      ),
+      dispose: (i) => i.dispose(),
+    );
+    gh.factory<_i709.ForgotPasswordCubit>(
+      () => _i709.ForgotPasswordCubit(
+        gh<_i602.SendPasswordResetLinkUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
+    gh.lazySingleton<_i909.SessionInitializer>(
+      () => _i909.SessionInitializer(gh<_i685.SessionManager>()),
     );
     return this;
   }

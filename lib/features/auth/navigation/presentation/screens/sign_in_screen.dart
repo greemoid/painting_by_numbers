@@ -144,7 +144,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   24.verticalSpace,
                   ShadButton.outline(
-                    onPressed: () {
+                    onPressed: () async {
                       // TODO: Google Sign In
                     },
                     width: double.infinity,
