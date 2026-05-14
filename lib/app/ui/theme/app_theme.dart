@@ -25,7 +25,9 @@ class MaterialPinThemeExtension
     double t,
   ) {
     if (other is! MaterialPinThemeExtension) return this;
-    return MaterialPinThemeExtension(theme: other.theme); // basic lerp
+    return MaterialPinThemeExtension(
+      theme: MaterialPinTheme.lerp(theme, other.theme, t),
+    );
   }
 }
 
@@ -69,6 +71,43 @@ class MaterialPinTheme {
     required this.entryAnimation,
     required this.cursorColor,
   });
+
+  static MaterialPinTheme lerp(
+    MaterialPinTheme a,
+    MaterialPinTheme b,
+    double t,
+  ) {
+    return MaterialPinTheme(
+      shape: t < 0.5 ? a.shape : b.shape,
+      cellSize: Size.lerp(a.cellSize, b.cellSize, t)!,
+      textStyle: TextStyle.lerp(a.textStyle, b.textStyle, t)!,
+      spacing: (a.spacing + (b.spacing - a.spacing) * t),
+      borderRadius: BorderRadius.lerp(a.borderRadius, b.borderRadius, t)!,
+      borderWidth: (a.borderWidth + (b.borderWidth - a.borderWidth) * t),
+      focusedBorderWidth:
+          (a.focusedBorderWidth +
+          (b.focusedBorderWidth - a.focusedBorderWidth) * t),
+      borderColor: Color.lerp(a.borderColor, b.borderColor, t)!,
+      filledBorderColor: Color.lerp(
+        a.filledBorderColor,
+        b.filledBorderColor,
+        t,
+      )!,
+      focusedBorderColor: Color.lerp(
+        a.focusedBorderColor,
+        b.focusedBorderColor,
+        t,
+      )!,
+      fillColor: Color.lerp(a.fillColor, b.fillColor, t)!,
+      focusedFillColor: Color.lerp(a.focusedFillColor, b.focusedFillColor, t)!,
+      filledFillColor: Color.lerp(a.filledFillColor, b.filledFillColor, t)!,
+      errorFillColor: Color.lerp(a.errorFillColor, b.errorFillColor, t)!,
+      errorBorderColor: Color.lerp(a.errorBorderColor, b.errorBorderColor, t)!,
+      errorTextStyle: TextStyle.lerp(a.errorTextStyle, b.errorTextStyle, t)!,
+      entryAnimation: t < 0.5 ? a.entryAnimation : b.entryAnimation,
+      cursorColor: Color.lerp(a.cursorColor, b.cursorColor, t)!,
+    );
+  }
 }
 
 enum MaterialPinShape { outlined }
