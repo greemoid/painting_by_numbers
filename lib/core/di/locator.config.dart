@@ -21,6 +21,7 @@ import 'package:paiting_by_numbers/app/app_flow/session/session_manager_impl.dar
     as _i143;
 import 'package:paiting_by_numbers/app/app_flow/session/token_storage_impl.dart'
     as _i223;
+import 'package:paiting_by_numbers/app/cubits/theme_cubit.dart' as _i802;
 import 'package:paiting_by_numbers/core/app_flow/session/session_manager.dart'
     as _i685;
 import 'package:paiting_by_numbers/core/app_flow/session/token_storage.dart'
@@ -38,6 +39,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final appModule = _$AppModule();
     gh.lazySingleton<_i197.SessionCubit>(() => _i197.SessionCubit());
+    gh.lazySingleton<_i802.ThemeCubit>(() => _i802.ThemeCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(() => appModule.secureStorage);
     gh.lazySingleton<_i519.FailureNotifier>(() => _i519.FailureNotifier());
     gh.lazySingleton<_i161.AppFlowCubit>(
