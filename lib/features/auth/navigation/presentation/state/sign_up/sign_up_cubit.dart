@@ -19,12 +19,17 @@ class SignUpCubit extends BaseCubit<SignUpState> {
   Future<void> signUpWithEmail({
     required String email,
     required String password,
+    required String username,
   }) async {
     emit(const SignUpState.loadingEmail());
     await execute(
-      useCase: () => _signUpWithEmailUseCase(email: email, password: password),
-      onSuccess: (user) => emit(SignUpState.success(user)),
-      onError: (failure) => emit(SignUpState.failure(failure)),
+      useCase: () => _signUpWithEmailUseCase(
+        email: email,
+        password: password,
+        username: username,
+      ),
+      onSuccess: (user) => safeEmit(SignUpState.success(user)),
+      onError: (failure) => safeEmit(SignUpState.failure(failure)),
     );
   }
 
@@ -32,8 +37,8 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     emit(const SignUpState.loadingGoogle());
     await execute(
       useCase: () => _signInWithGoogleUseCase(),
-      onSuccess: (user) => emit(SignUpState.success(user)),
-      onError: (failure) => emit(SignUpState.failure(failure)),
+      onSuccess: (user) => safeEmit(SignUpState.success(user)),
+      onError: (failure) => safeEmit(SignUpState.failure(failure)),
     );
   }
 }

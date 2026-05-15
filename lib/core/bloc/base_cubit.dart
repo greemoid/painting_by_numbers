@@ -51,7 +51,12 @@ abstract class BaseCubit<State> extends Cubit<State> {
     FutureOr<void> Function(Failure)? onError,
     bool notify,
   ) async {
+    if (isClosed) return;
     if (notify) _failureNotifier.notify(failure);
     await onError?.call(failure);
+  }
+
+  void safeEmit(State state) {
+    if (!isClosed) emit(state);
   }
 }

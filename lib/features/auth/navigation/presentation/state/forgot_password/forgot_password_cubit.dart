@@ -17,8 +17,8 @@ class ForgotPasswordCubit extends BaseCubit<ForgotPasswordState> {
     emit(const ForgotPasswordState.loading());
     await execute(
       useCase: () => _sendPasswordResetLinkUseCase(email: email),
-      onSuccess: (_) => emit(const ForgotPasswordState.success()),
-      onError: (failure) => emit(ForgotPasswordState.failure(failure)),
+      onSuccess: (_) => safeEmit(const ForgotPasswordState.success()),
+      onError: (failure) => safeEmit(ForgotPasswordState.failure(failure)),
     );
   }
 }

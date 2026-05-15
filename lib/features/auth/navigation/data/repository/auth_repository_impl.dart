@@ -40,28 +40,30 @@ class AuthRepositoryImpl with RepositoryGuardMixin implements AuthRepository {
     required String email,
     required String password,
   }) => guard(() async {
-        final userModel = await _authService.signInWithEmail(
-          email: email,
-          password: password,
-        );
-        return userModel.toEntity();
-      });
+    final userModel = await _authService.signInWithEmail(
+      email: email,
+      password: password,
+    );
+    return userModel.toEntity();
+  });
 
   @override
   Future<Either<Failure, UserEntity>> signInWithGoogle() => guard(() async {
-        final userModel = await _authService.signInWithGoogle();
-        return userModel.toEntity();
-      });
+    final userModel = await _authService.signInWithGoogle();
+    return userModel.toEntity();
+  });
 
   @override
   Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,
     required String password,
+    required String username,
   }) => guard(() async {
-        final userModel = await _authService.signUpWithEmail(
-          email: email,
-          password: password,
-        );
-        return userModel.toEntity();
-      });
+    final userModel = await _authService.signUpWithEmail(
+      email: email,
+      password: password,
+      username: username,
+    );
+    return userModel.toEntity();
+  });
 }

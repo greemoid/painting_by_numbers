@@ -17,29 +17,29 @@ class VerifyEmailCubit extends BaseCubit<VerifyEmailState> {
   ) : super(const VerifyEmailState.initial(), failureNotifier);
 
   Future<void> sendVerificationEmail() async {
-    emit(const VerifyEmailState.loadingResend());
+    safeEmit(const VerifyEmailState.loadingResend());
     await execute(
       useCase: () => _sendEmailVerificationUseCase(),
-      onSuccess: (_) => emit(const VerifyEmailState.success()),
-      onError: (failure) => emit(VerifyEmailState.failure(failure)),
+      onSuccess: (_) => safeEmit(const VerifyEmailState.success()),
+      onError: (failure) => safeEmit(VerifyEmailState.failure(failure)),
     );
   }
 
   Future<void> reloadUser({bool isManual = false}) async {
     if (isManual) {
-      emit(const VerifyEmailState.loadingManual());
+      safeEmit(const VerifyEmailState.loadingManual());
     }
 
     await execute(
       useCase: () => _reloadUserUseCase(),
       onSuccess: (_) {
         if (isManual) {
-          emit(const VerifyEmailState.initial());
+          safeEmit(const VerifyEmailState.initial());
         }
       },
       onError: (failure) {
         if (isManual) {
-          emit(VerifyEmailState.failure(failure));
+          safeEmit(VerifyEmailState.failure(failure));
         }
       },
     );

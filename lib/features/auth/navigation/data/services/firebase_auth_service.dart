@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:paiting_by_numbers/core/utils/logger/app_logger.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/data/models/user/user_model.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/data/services/auth_service.dart';
 
@@ -26,7 +27,7 @@ class FirebaseAuthService implements AuthService {
 
   @override
   Future<void> logOut() async {
-    await _firebaseAuth.signOut();
+    await Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
   }
 
   @override
@@ -76,11 +77,21 @@ class FirebaseAuthService implements AuthService {
   Future<UserModel> signUpWithEmail({
     required String email,
     required String password,
+    required String username,
   }) async {
     final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
-    return UserModel.fromFirebase(user: userCredential.user!);
+
+    final user = userCredential.user;
+    if (user == null) {
+      throw FirebaseAuthException(code: 'user-not-found');
+    }
+
+    await user.updateDisplayName(username);
+    await user.reload();
+    AppLogger.debug("firebaseuser: ${_firebaseAuth.currentUser}");
+    return UserModel.fromFirebase(user: _firebaseAuth.currentUser ?? user);
   }
 }

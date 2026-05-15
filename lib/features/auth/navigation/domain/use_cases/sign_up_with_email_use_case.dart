@@ -13,7 +13,12 @@ class SignUpWithEmailUseCase {
   Future<Either<Failure, UserEntity>> call({
     required String email,
     required String password,
+    required String username,
   }) {
-    return _authRepository.signUpWithEmail(email: email, password: password);
+    return _authRepository.signUpWithEmail(
+      email: email,
+      password: password,
+      username: username,
+    );
   }
 }

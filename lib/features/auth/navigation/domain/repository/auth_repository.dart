@@ -18,6 +18,7 @@ abstract interface class AuthRepository {
   Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,
     required String password,
+    required String username,
   });
 
   Future<Either<Failure, UserEntity>> signInWithEmail({

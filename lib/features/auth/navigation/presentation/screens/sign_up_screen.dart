@@ -26,10 +26,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (_formKey.currentState!.saveAndValidate()) {
       final email = _formKey.currentState!.value['email'] as String;
       final password = _formKey.currentState!.value['password'] as String;
+      final username = _formKey.currentState!.value['username'] as String;
 
       context.read<SignUpCubit>().signUpWithEmail(
         email: email,
         password: password,
+        username: username,
       );
     }
   }

@@ -23,8 +23,8 @@ class SignInCubit extends BaseCubit<SignInState> {
     emit(const SignInState.loadingEmail());
     await execute(
       useCase: () => _signInWithEmailUseCase(email: email, password: password),
-      onSuccess: (user) => emit(SignInState.success(user)),
-      onError: (failure) => emit(SignInState.failure(failure)),
+      onSuccess: (user) => safeEmit(SignInState.success(user)),
+      onError: (failure) => safeEmit(SignInState.failure(failure)),
     );
   }
 
@@ -32,8 +32,8 @@ class SignInCubit extends BaseCubit<SignInState> {
     emit(const SignInState.loadingGoogle());
     await execute(
       useCase: () => _signInWithGoogleUseCase(),
-      onSuccess: (user) => emit(SignInState.success(user)),
-      onError: (failure) => emit(SignInState.failure(failure)),
+      onSuccess: (user) => safeEmit(SignInState.success(user)),
+      onError: (failure) => safeEmit(SignInState.failure(failure)),
     );
   }
 }

@@ -16,6 +16,7 @@ abstract interface class AuthService {
   Future<UserModel> signUpWithEmail({
     required String email,
     required String password,
+    required String username,
   });
 
   Future<UserModel> signInWithEmail({
