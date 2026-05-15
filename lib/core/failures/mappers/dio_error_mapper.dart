@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:paiting_by_numbers/core/cubits/base/failure.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
 
 class DioErrorMapper {
   static Failure map(Object error) {

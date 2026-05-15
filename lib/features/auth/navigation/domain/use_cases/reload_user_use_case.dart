@@ -1,0 +1,15 @@
+import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
+import 'package:paiting_by_numbers/features/auth/navigation/domain/repository/auth_repository.dart';
+
+@injectable
+class ReloadUserUseCase {
+  final AuthRepository _authRepository;
+
+  ReloadUserUseCase(this._authRepository);
+
+  Future<Either<Failure, void>> call() {
+    return _authRepository.reloadUser();
+  }
+}

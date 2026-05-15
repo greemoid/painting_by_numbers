@@ -1,16 +1,25 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
 import 'package:paiting_by_numbers/app/app_flow/session/session_cubit.dart';
-import 'package:paiting_by_numbers/core/app_flow/session/auth_tokens.dart';
 import 'package:paiting_by_numbers/core/app_flow/session/session_manager.dart';
 import 'package:paiting_by_numbers/core/app_flow/session/session_status.dart';
-import 'package:paiting_by_numbers/core/app_flow/session/token_storage.dart';
+import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/get_current_user_use_case.dart';
+import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/watch_auth_state_use_case.dart';
 
 @LazySingleton(as: SessionManager)
 class SessionManagerImpl implements SessionManager {
   final SessionCubit _sessionCubit;
-  final TokenStorage _tokenStorage;
+  final WatchAuthStateUseCase _watchAuthStateUseCase;
+  final GetCurrentUserUseCase _getCurrentUserUseCase;
 
-  SessionManagerImpl(this._sessionCubit, this._tokenStorage);
+  StreamSubscription? _authSubscription;
+
+  SessionManagerImpl(
+    this._sessionCubit,
+    this._watchAuthStateUseCase,
+    this._getCurrentUserUseCase,
+  );
 
   @override
   SessionStatus get currentSessionStatus => _sessionCubit.state;
@@ -19,25 +28,34 @@ class SessionManagerImpl implements SessionManager {
   Future<void> restoreSession() async {
     _sessionCubit.setStatus(SessionStatus.unknown);
 
-    final AuthTokens? tokens = await _tokenStorage.readTokens();
-
-    if (tokens == null) {
-      _sessionCubit.setStatus(SessionStatus.unauthenticated);
+    final currentUser = _getCurrentUserUseCase();
+    if (currentUser != null) {
+      if (currentUser.isEmailVerified) {
+        _sessionCubit.setStatus(SessionStatus.authenticated);
+      } else {
+        _sessionCubit.setStatus(SessionStatus.unverified);
+      }
     } else {
-      // TODO: Here you could also verify the token with Firebase if needed
-      _sessionCubit.setStatus(SessionStatus.authenticated);
+      _sessionCubit.setStatus(SessionStatus.unauthenticated);
     }
+
+    _authSubscription?.cancel();
+    _authSubscription = _watchAuthStateUseCase().listen((user) {
+      if (user != null) {
+        if (user.isEmailVerified) {
+          _sessionCubit.setStatus(SessionStatus.authenticated);
+        } else {
+          _sessionCubit.setStatus(SessionStatus.unverified);
+        }
+      } else {
+        _sessionCubit.setStatus(SessionStatus.unauthenticated);
+      }
+    });
   }
 
   @override
-  Future<void> openSession(AuthTokens tokens) async {
-    await _tokenStorage.saveTokens(tokens);
-    _sessionCubit.setStatus(SessionStatus.authenticated);
-  }
-
-  @override
-  Future<void> closeSession() async {
-    await _tokenStorage.clearTokens();
-    _sessionCubit.setStatus(SessionStatus.unauthenticated);
+  @disposeMethod
+  void dispose() {
+    _authSubscription?.cancel();
   }
 }

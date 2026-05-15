@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:paiting_by_numbers/core/cubits/base/dio_error_mapper.dart';
-import 'package:paiting_by_numbers/core/cubits/base/failure.dart';
+import 'package:paiting_by_numbers/core/failures/mappers/dio_error_mapper.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart';
 import 'package:paiting_by_numbers/core/utils/logger/app_logger.dart';
 
@@ -51,7 +51,12 @@ abstract class BaseCubit<State> extends Cubit<State> {
     FutureOr<void> Function(Failure)? onError,
     bool notify,
   ) async {
+    if (isClosed) return;
     if (notify) _failureNotifier.notify(failure);
     await onError?.call(failure);
+  }
+
+  void safeEmit(State state) {
+    if (!isClosed) emit(state);
   }
 }

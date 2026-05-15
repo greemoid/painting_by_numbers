@@ -10,6 +10,10 @@ class AppFlowResolver {
       return AppFlow.main;
     }
 
+    if (session == SessionStatus.unverified) {
+      return AppFlow.verifyEmail;
+    }
+
     return AppFlow.auth;
   }
 }

@@ -10,9 +10,12 @@ abstract final class AppFlowRoutes {
   static const signIn = '$auth/sign-in';
   static const home = '$main/home';
 
+  static const verifyEmail = '$auth/verify-email';
+
   /// Resolves the starting path for a given flow
   static String pathFor(AppFlow flow) => switch (flow) {
     AppFlow.auth => signIn,
+    AppFlow.verifyEmail => verifyEmail,
     AppFlow.main => home,
   };
 }

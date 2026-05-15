@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:injectable/injectable.dart';
-import 'package:paiting_by_numbers/core/cubits/base/failure.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
 
 @lazySingleton
 class FailureNotifier {

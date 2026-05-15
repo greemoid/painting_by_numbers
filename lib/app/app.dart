@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paiting_by_numbers/app/cubits/theme_cubit.dart';
+import 'package:paiting_by_numbers/app/ui/theme/state/theme_cubit.dart';
 import 'package:paiting_by_numbers/app/localization/app_locales.dart';
 import 'package:paiting_by_numbers/core/di/locator.dart';
 import 'package:paiting_by_numbers/app/ui/theme/app_theme.dart';
