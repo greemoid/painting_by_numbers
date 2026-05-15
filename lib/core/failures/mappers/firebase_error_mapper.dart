@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:paiting_by_numbers/core/cubits/base/failure.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
 
 class FirebaseErrorMapper {
   static Failure map(Object error) {

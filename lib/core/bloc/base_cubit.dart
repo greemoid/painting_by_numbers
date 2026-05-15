@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:paiting_by_numbers/core/cubits/base/dio_error_mapper.dart';
-import 'package:paiting_by_numbers/core/cubits/base/failure.dart';
+import 'package:paiting_by_numbers/core/failures/mappers/dio_error_mapper.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart';
 import 'package:paiting_by_numbers/core/utils/logger/app_logger.dart';
 

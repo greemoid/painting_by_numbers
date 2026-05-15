@@ -8,4 +8,7 @@ enum SessionStatus {
 
   /// Initial state before checking auth.
   unknown,
+
+  /// User is authenticated but hasn't verified their email.
+  unverified,
 }

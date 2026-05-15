@@ -65,6 +65,10 @@ final class AppRouter {
       return AppFlowRoutes.signIn;
     }
 
+    if (flow == AppFlow.verifyEmail && location != AppFlowRoutes.verifyEmail) {
+      return AppFlowRoutes.verifyEmail;
+    }
+
     if (flow == AppFlow.main && !location.startsWith(AppFlowRoutes.main)) {
       return AppFlowRoutes.home;
     }

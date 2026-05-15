@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:paiting_by_numbers/core/cubits/base/base_cubit.dart';
+import 'package:paiting_by_numbers/core/bloc/base_cubit.dart';
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/sign_in_with_email_use_case.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/sign_in_with_google_use_case.dart';
@@ -20,7 +20,7 @@ class SignInCubit extends BaseCubit<SignInState> {
     required String email,
     required String password,
   }) async {
-    emit(const SignInState.loading());
+    emit(const SignInState.loadingEmail());
     await execute(
       useCase: () => _signInWithEmailUseCase(email: email, password: password),
       onSuccess: (user) => emit(SignInState.success(user)),
@@ -29,7 +29,7 @@ class SignInCubit extends BaseCubit<SignInState> {
   }
 
   Future<void> signInWithGoogle() async {
-    emit(const SignInState.loading());
+    emit(const SignInState.loadingGoogle());
     await execute(
       useCase: () => _signInWithGoogleUseCase(),
       onSuccess: (user) => emit(SignInState.success(user)),

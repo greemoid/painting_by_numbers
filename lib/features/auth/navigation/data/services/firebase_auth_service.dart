@@ -13,7 +13,7 @@ class FirebaseAuthService implements AuthService {
 
   @override
   Stream<UserModel?> get authStateChanges {
-    return _firebaseAuth.authStateChanges().map(
+    return _firebaseAuth.userChanges().map(
       (event) => event == null ? null : UserModel.fromFirebase(user: event),
     );
   }
@@ -32,6 +32,19 @@ class FirebaseAuthService implements AuthService {
   @override
   Future<void> sendPasswordResetLink({required String email}) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<void> sendEmailVerification() async {
+    final user = _firebaseAuth.currentUser;
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
+
+  @override
+  Future<void> reloadUser() async {
+    await _firebaseAuth.currentUser?.reload();
   }
 
   @override

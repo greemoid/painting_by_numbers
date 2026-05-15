@@ -16,6 +16,11 @@ abstract class  LocaleKeys {
   static const failure_weak_password = 'failure.weak_password';
   static const failure_operation_not_allowed = 'failure.operation_not_allowed';
   static const failure_too_many_requests = 'failure.too_many_requests';
+  static const failure_google_interrupted = 'failure.google_interrupted';
+  static const failure_google_misconfigured = 'failure.google_misconfigured';
+  static const failure_google_ui_unavailable = 'failure.google_ui_unavailable';
+  static const failure_google_user_mismatch = 'failure.google_user_mismatch';
+  static const failure_canceled = 'failure.canceled';
   static const failure = 'failure';
   static const auth_sign_in = 'auth.sign_in';
   static const auth_sign_in_title = 'auth.sign_in_title';
@@ -41,6 +46,13 @@ abstract class  LocaleKeys {
   static const auth_forgot_password = 'auth.forgot_password';
   static const auth_send_reset_link = 'auth.send_reset_link';
   static const auth_back_to_sign_in = 'auth.back_to_sign_in';
+  static const auth_reset_link_sent = 'auth.reset_link_sent';
   static const auth = 'auth';
+  static const verify_email_title = 'verify_email.title';
+  static const verify_email_subtitle = 'verify_email.subtitle';
+  static const verify_email_i_have_verified = 'verify_email.i_have_verified';
+  static const verify_email_resend = 'verify_email.resend';
+  static const verify_email_cancel = 'verify_email.cancel';
+  static const verify_email = 'verify_email';
 
 }

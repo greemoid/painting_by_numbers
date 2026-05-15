@@ -1,18 +1,23 @@
 {
     "failure": {
-        "network": "Connection problem",
-        "unauthorized": "Unauthorized access",
-        "server": "Server error",
-        "not_found": "Not found",
-        "unknown": "Unknown error",
-        "invalid_credential": "Invalid email or password",
-        "user_not_found": "User with this email not found",
-        "wrong_password": "Wrong password",
-        "email_already_in_use": "Email already in use",
-        "user_disabled": "User disabled",
-        "weak_password": "Password is too weak",
-        "operation_not_allowed": "Operation not allowed",
-        "too_many_requests": "Too many requests. Try again later"
+        "network": "No internet connection. Please check your network.",
+        "unauthorized": "Session expired. Please sign in again.",
+        "server": "Server is temporarily unavailable. Try again later.",
+        "not_found": "Requested resource was not found.",
+        "unknown": "Something went wrong. Please try again.",
+        "invalid_credential": "Invalid email or password.",
+        "user_not_found": "Account with this email does not exist.",
+        "wrong_password": "The password you entered is incorrect.",
+        "email_already_in_use": "This email is already registered.",
+        "user_disabled": "This account has been disabled.",
+        "weak_password": "Password is too weak. Please use a stronger one.",
+        "operation_not_allowed": "This operation is not currently allowed.",
+        "too_many_requests": "Too many attempts. Please try again later.",
+        "google_interrupted": "Sign-in process was interrupted.",
+        "google_misconfigured": "Service configuration error. Contact support.",
+        "google_ui_unavailable": "System error: Could not display sign-in.",
+        "google_user_mismatch": "Account mismatch detected.",
+        "canceled": "Sign-in canceled."
     },
     "auth": {
         "sign_in": "Sign In",
@@ -38,6 +43,14 @@
         "already_have_account": "Already have an account?",
         "forgot_password": "Forgot password?",
         "send_reset_link": "Send reset link",
-        "back_to_sign_in": "Back to log in"
+        "back_to_sign_in": "Back to log in",
+        "reset_link_sent": "Password reset link sent! Please check your email."
+    },
+    "verify_email": {
+        "title": "Verify your email",
+        "subtitle": "We have sent an email with a confirmation link to your email address. Please click on the link to verify your email and continue.",
+        "i_have_verified": "I have verified",
+        "resend": "Resend Email",
+        "cancel": "Cancel"
     }
 }

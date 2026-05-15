@@ -66,3 +66,28 @@ class TooManyRequestsFailure extends Failure {
   const TooManyRequestsFailure()
     : super(messageKey: LocaleKeys.failure_too_many_requests);
 }
+
+class CanceledByUserFailure extends Failure {
+  const CanceledByUserFailure()
+    : super(messageKey: LocaleKeys.failure_canceled);
+}
+
+class GoogleInterruptedFailure extends Failure {
+  const GoogleInterruptedFailure()
+    : super(messageKey: LocaleKeys.failure_google_interrupted);
+}
+
+class GoogleMisconfiguredFailure extends Failure {
+  const GoogleMisconfiguredFailure()
+    : super(messageKey: LocaleKeys.failure_google_misconfigured);
+}
+
+class GoogleUIUnavailableFailure extends Failure {
+  const GoogleUIUnavailableFailure()
+    : super(messageKey: LocaleKeys.failure_google_ui_unavailable);
+}
+
+class GoogleUserMismatchFailure extends Failure {
+  const GoogleUserMismatchFailure()
+    : super(messageKey: LocaleKeys.failure_google_user_mismatch);
+}

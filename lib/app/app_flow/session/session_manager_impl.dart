@@ -30,7 +30,11 @@ class SessionManagerImpl implements SessionManager {
 
     final currentUser = _getCurrentUserUseCase();
     if (currentUser != null) {
-      _sessionCubit.setStatus(SessionStatus.authenticated);
+      if (currentUser.isEmailVerified) {
+        _sessionCubit.setStatus(SessionStatus.authenticated);
+      } else {
+        _sessionCubit.setStatus(SessionStatus.unverified);
+      }
     } else {
       _sessionCubit.setStatus(SessionStatus.unauthenticated);
     }
@@ -38,7 +42,11 @@ class SessionManagerImpl implements SessionManager {
     _authSubscription?.cancel();
     _authSubscription = _watchAuthStateUseCase().listen((user) {
       if (user != null) {
-        _sessionCubit.setStatus(SessionStatus.authenticated);
+        if (user.isEmailVerified) {
+          _sessionCubit.setStatus(SessionStatus.authenticated);
+        } else {
+          _sessionCubit.setStatus(SessionStatus.unverified);
+        }
       } else {
         _sessionCubit.setStatus(SessionStatus.unauthenticated);
       }

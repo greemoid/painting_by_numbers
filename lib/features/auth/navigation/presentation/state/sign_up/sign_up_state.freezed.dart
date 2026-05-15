@@ -55,12 +55,13 @@ extension SignUpStatePatterns on SignUpState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _LoadingEmail value)?  loadingEmail,TResult Function( _LoadingGoogle value)?  loadingGoogle,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
+return initial(_that);case _LoadingEmail() when loadingEmail != null:
+return loadingEmail(_that);case _LoadingGoogle() when loadingGoogle != null:
+return loadingGoogle(_that);case _Success() when success != null:
 return success(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return orElse();
@@ -80,12 +81,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _LoadingEmail value)  loadingEmail,required TResult Function( _LoadingGoogle value)  loadingGoogle,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
-return initial(_that);case _Loading():
-return loading(_that);case _Success():
+return initial(_that);case _LoadingEmail():
+return loadingEmail(_that);case _LoadingGoogle():
+return loadingGoogle(_that);case _Success():
 return success(_that);case _Failure():
 return failure(_that);case _:
   throw StateError('Unexpected subclass');
@@ -104,12 +106,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _LoadingEmail value)?  loadingEmail,TResult? Function( _LoadingGoogle value)?  loadingGoogle,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
+return initial(_that);case _LoadingEmail() when loadingEmail != null:
+return loadingEmail(_that);case _LoadingGoogle() when loadingGoogle != null:
+return loadingGoogle(_that);case _Success() when success != null:
 return success(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return null;
@@ -128,11 +131,12 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  success,TResult Function( Failure failure)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loadingEmail,TResult Function()?  loadingGoogle,TResult Function( UserEntity user)?  success,TResult Function( Failure failure)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
+return initial();case _LoadingEmail() when loadingEmail != null:
+return loadingEmail();case _LoadingGoogle() when loadingGoogle != null:
+return loadingGoogle();case _Success() when success != null:
 return success(_that.user);case _Failure() when failure != null:
 return failure(_that.failure);case _:
   return orElse();
@@ -152,11 +156,12 @@ return failure(_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  success,required TResult Function( Failure failure)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loadingEmail,required TResult Function()  loadingGoogle,required TResult Function( UserEntity user)  success,required TResult Function( Failure failure)  failure,}) {final _that = this;
 switch (_that) {
 case _Initial():
-return initial();case _Loading():
-return loading();case _Success():
+return initial();case _LoadingEmail():
+return loadingEmail();case _LoadingGoogle():
+return loadingGoogle();case _Success():
 return success(_that.user);case _Failure():
 return failure(_that.failure);case _:
   throw StateError('Unexpected subclass');
@@ -175,11 +180,12 @@ return failure(_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  success,TResult? Function( Failure failure)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loadingEmail,TResult? Function()?  loadingGoogle,TResult? Function( UserEntity user)?  success,TResult? Function( Failure failure)?  failure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
+return initial();case _LoadingEmail() when loadingEmail != null:
+return loadingEmail();case _LoadingGoogle() when loadingGoogle != null:
+return loadingGoogle();case _Success() when success != null:
 return success(_that.user);case _Failure() when failure != null:
 return failure(_that.failure);case _:
   return null;
@@ -224,8 +230,8 @@ String toString() {
 /// @nodoc
 
 
-class _Loading implements SignUpState {
-  const _Loading();
+class _LoadingEmail implements SignUpState {
+  const _LoadingEmail();
   
 
 
@@ -235,7 +241,7 @@ class _Loading implements SignUpState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadingEmail);
 }
 
 
@@ -244,7 +250,39 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SignUpState.loading()';
+  return 'SignUpState.loadingEmail()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadingGoogle implements SignUpState {
+  const _LoadingGoogle();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadingGoogle);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SignUpState.loadingGoogle()';
 }
 
 

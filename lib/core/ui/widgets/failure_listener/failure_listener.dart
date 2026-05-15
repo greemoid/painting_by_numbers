@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:paiting_by_numbers/core/cubits/base/failure.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
 import 'package:paiting_by_numbers/core/di/locator.dart';
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart';
 import 'package:paiting_by_numbers/core/ui/ui_kit/snack_bar/custom_snack_bar.dart';

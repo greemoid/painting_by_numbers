@@ -5,6 +5,10 @@ abstract interface class AuthService {
 
   Future<void> sendPasswordResetLink({required String email});
 
+  Future<void> sendEmailVerification();
+
+  Future<void> reloadUser();
+
   Stream<UserModel?> get authStateChanges;
 
   UserModel? get currentUser;

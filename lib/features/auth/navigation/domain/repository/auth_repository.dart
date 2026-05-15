@@ -1,11 +1,15 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:paiting_by_numbers/core/cubits/base/failure.dart';
+import 'package:paiting_by_numbers/core/failures/failure.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/domain/entities/user/user_entity.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failure, void>> logOut();
 
   Future<Either<Failure, void>> sendPasswordResetLink({required String email});
+
+  Future<Either<Failure, void>> sendEmailVerification();
+
+  Future<Either<Failure, void>> reloadUser();
 
   Stream<UserEntity?> get authStateChanges;
 

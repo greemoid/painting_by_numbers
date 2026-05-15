@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:paiting_by_numbers/core/cubits/base/base_cubit.dart';
+import 'package:paiting_by_numbers/core/bloc/base_cubit.dart';
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/send_password_reset_link_use_case.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/forgot_password/forgot_password_state.dart';

@@ -5,4 +5,7 @@ enum AppFlow {
 
   /// User is authenticated and in the main app experience.
   main,
+
+  /// User is authenticated but hasn't verified their email.
+  verifyEmail,
 }

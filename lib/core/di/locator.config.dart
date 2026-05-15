@@ -21,7 +21,8 @@ import 'package:paiting_by_numbers/app/app_flow/session/session_initializer.dart
     as _i909;
 import 'package:paiting_by_numbers/app/app_flow/session/session_manager_impl.dart'
     as _i143;
-import 'package:paiting_by_numbers/app/cubits/theme_cubit.dart' as _i802;
+import 'package:paiting_by_numbers/app/ui/theme/state/theme_cubit.dart'
+    as _i747;
 import 'package:paiting_by_numbers/core/app_flow/session/session_manager.dart'
     as _i685;
 import 'package:paiting_by_numbers/core/di/firebase_module.dart' as _i83;
@@ -40,6 +41,10 @@ import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/get
     as _i321;
 import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/log_out_use_case.dart'
     as _i675;
+import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/reload_user_use_case.dart'
+    as _i170;
+import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/send_email_verification_use_case.dart'
+    as _i260;
 import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/send_password_reset_link_use_case.dart'
     as _i602;
 import 'package:paiting_by_numbers/features/auth/navigation/domain/use_cases/sign_in_with_email_use_case.dart'
@@ -56,6 +61,8 @@ import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/s
     as _i581;
 import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/sign_up/sign_up_cubit.dart'
     as _i693;
+import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/verify_email/verify_email_cubit.dart'
+    as _i780;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -67,7 +74,7 @@ extension GetItInjectableX on _i174.GetIt {
     final firebaseModule = _$FirebaseModule();
     final appModule = _$AppModule();
     gh.lazySingleton<_i197.SessionCubit>(() => _i197.SessionCubit());
-    gh.lazySingleton<_i802.ThemeCubit>(() => _i802.ThemeCubit());
+    gh.lazySingleton<_i747.ThemeCubit>(() => _i747.ThemeCubit());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.lazySingleton<_i558.FlutterSecureStorage>(() => appModule.secureStorage);
@@ -89,6 +96,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i675.LogOutUseCase>(
       () => _i675.LogOutUseCase(gh<_i729.AuthRepository>()),
+    );
+    gh.factory<_i170.ReloadUserUseCase>(
+      () => _i170.ReloadUserUseCase(gh<_i729.AuthRepository>()),
+    );
+    gh.factory<_i260.SendEmailVerificationUseCase>(
+      () => _i260.SendEmailVerificationUseCase(gh<_i729.AuthRepository>()),
     );
     gh.factory<_i602.SendPasswordResetLinkUseCase>(
       () => _i602.SendPasswordResetLinkUseCase(gh<_i729.AuthRepository>()),
@@ -112,12 +125,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i519.FailureNotifier>(),
       ),
     );
-    gh.factory<_i693.SignUpCubit>(
-      () => _i693.SignUpCubit(
-        gh<_i443.SignUpWithEmailUseCase>(),
-        gh<_i519.FailureNotifier>(),
-      ),
-    );
     gh.lazySingleton<_i685.SessionManager>(
       () => _i143.SessionManagerImpl(
         gh<_i197.SessionCubit>(),
@@ -129,6 +136,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i709.ForgotPasswordCubit>(
       () => _i709.ForgotPasswordCubit(
         gh<_i602.SendPasswordResetLinkUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
+    gh.factory<_i693.SignUpCubit>(
+      () => _i693.SignUpCubit(
+        gh<_i443.SignUpWithEmailUseCase>(),
+        gh<_i721.SignInWithGoogleUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
+    gh.factory<_i780.VerifyEmailCubit>(
+      () => _i780.VerifyEmailCubit(
+        gh<_i260.SendEmailVerificationUseCase>(),
+        gh<_i170.ReloadUserUseCase>(),
         gh<_i519.FailureNotifier>(),
       ),
     );
