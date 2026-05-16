@@ -56,7 +56,11 @@ class FirebaseAuthService implements AuthService {
       email: email,
       password: password,
     );
-    return UserModel.fromFirebase(user: userCredential.user!);
+    final user = userCredential.user;
+    if (user == null) {
+      throw FirebaseAuthException(code: 'user-not-found');
+    }
+    return UserModel.fromFirebase(user: user);
   }
 
   @override
@@ -68,7 +72,11 @@ class FirebaseAuthService implements AuthService {
       idToken: googleAuth.idToken,
     );
     final userCredential = await _firebaseAuth.signInWithCredential(credential);
-    return UserModel.fromFirebase(user: userCredential.user!);
+    final user = userCredential.user;
+    if (user == null) {
+      throw FirebaseAuthException(code: 'user-not-found');
+    }
+    return UserModel.fromFirebase(user: user);
   }
 
   @override

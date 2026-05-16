@@ -58,18 +58,17 @@ final class AppRouter {
 
     // Authentication Guard
     if (flow == AppFlow.auth && !location.startsWith(AppFlowRoutes.auth)) {
-      return AppFlowRoutes.signIn;
+      return target;
     }
 
-    if (flow == AppFlow.verifyEmail && location != AppFlowRoutes.verifyEmail) {
-      return AppFlowRoutes.verifyEmail;
+    if (flow == AppFlow.verifyEmail && location != target) {
+      return target;
     }
 
     if (flow == AppFlow.main && !location.startsWith(AppFlowRoutes.main)) {
-      return AppFlowRoutes.home;
+      return target;
     }
 
-    // Allow sub-routes within the current flow
     return null;
   }
 }
