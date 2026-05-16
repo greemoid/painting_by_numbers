@@ -18,5 +18,9 @@ abstract class AppBorderRadiuses {
 
   static Radius get roundedXl => Radius.circular(20.r);
 
+  static Radius get rounded2xl => Radius.circular(24.r);
+
+  static Radius get rounded3xl => Radius.circular(32.r);
+
   static Radius get roundedFull => Radius.circular(9999.r);
 }

@@ -1,4 +1,6 @@
 import 'package:paiting_by_numbers/core/app_flow/app_flow.dart';
+import 'package:paiting_by_numbers/features/auth/navigation/auth_routes.dart';
+import 'package:paiting_by_numbers/features/home/navigation/home_routes.dart';
 
 /// Maps [AppFlow] to a concrete route path.
 abstract final class AppFlowRoutes {
@@ -6,16 +8,10 @@ abstract final class AppFlowRoutes {
   static const auth = '/auth';
   static const main = '/main';
 
-  /// Internal sub-paths
-  static const signIn = '$auth/sign-in';
-  static const home = '$main/home';
-
-  static const verifyEmail = '$auth/verify-email';
-
   /// Resolves the starting path for a given flow
   static String pathFor(AppFlow flow) => switch (flow) {
-    AppFlow.auth => signIn,
-    AppFlow.verifyEmail => verifyEmail,
-    AppFlow.main => home,
+    AppFlow.auth => AuthRoutes.signIn,
+    AppFlow.verifyEmail => AuthRoutes.verifyEmail,
+    AppFlow.main => HomeRoutes.home,
   };
 }

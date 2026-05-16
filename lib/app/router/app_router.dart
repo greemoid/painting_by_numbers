@@ -8,6 +8,8 @@ import 'package:paiting_by_numbers/core/app_flow/app_flow.dart';
 import 'package:paiting_by_numbers/core/di/locator.dart';
 import 'package:paiting_by_numbers/core/feature/feature_module.dart';
 
+import 'package:paiting_by_numbers/app/router/app_router_shell.dart';
+
 final class _GoRouterRefreshStream extends ChangeNotifier {
   _GoRouterRefreshStream(Stream<dynamic> stream) {
     _subscription = stream.listen((_) {
@@ -40,16 +42,10 @@ final class AppRouter {
       refreshListenable: _GoRouterRefreshStream(appFlowCubit.stream),
       redirect: (context, state) => _redirect(state, appFlowCubit.state),
       routes: <RouteBase>[
-        ShellRoute(
-          builder: (context, state, child) => child,
-          routes: <RouteBase>[
-            /// HOW TO ADD A NEW FEATURE:
-            /// 1. Create a class implementing [FeatureModule].
-            /// 2. Register it in `lib/app/registry/feature_registry.dart`.
-            /// 3. Its [FeatureModule.routes] will be automatically injected here.
-            for (final feature in features) ...feature.routes,
-          ],
-        ),
+        AppRouterShell.build(features: features),
+        // Add other feature routes (like Auth) outside the main navigation shell
+        for (final feature in AppRouterShell.getStandaloneFeatures(features))
+          ...feature.routes,
       ],
     );
   }
@@ -62,18 +58,17 @@ final class AppRouter {
 
     // Authentication Guard
     if (flow == AppFlow.auth && !location.startsWith(AppFlowRoutes.auth)) {
-      return AppFlowRoutes.signIn;
+      return target;
     }
 
-    if (flow == AppFlow.verifyEmail && location != AppFlowRoutes.verifyEmail) {
-      return AppFlowRoutes.verifyEmail;
+    if (flow == AppFlow.verifyEmail && location != target) {
+      return target;
     }
 
     if (flow == AppFlow.main && !location.startsWith(AppFlowRoutes.main)) {
-      return AppFlowRoutes.home;
+      return target;
     }
 
-    // Allow sub-routes within the current flow
     return null;
   }
 }
