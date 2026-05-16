@@ -9,6 +9,8 @@ abstract final class AppFlowRoutes {
   /// Internal sub-paths
   static const signIn = '$auth/sign-in';
   static const home = '$main/home';
+  static const create = '$main/create';
+  static const settings = '$main/settings';
 
   static const verifyEmail = '$auth/verify-email';
 
