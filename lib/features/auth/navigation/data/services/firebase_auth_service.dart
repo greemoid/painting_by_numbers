@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paiting_by_numbers/core/utils/logger/app_logger.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/data/models/user/user_model.dart';
 import 'package:paiting_by_numbers/features/auth/navigation/data/services/auth_service.dart';
 
@@ -90,7 +89,6 @@ class FirebaseAuthService implements AuthService {
 
     await user.updateDisplayName(username);
     await user.reload();
-    AppLogger.debug("firebaseuser: ${_firebaseAuth.currentUser}");
     return UserModel.fromFirebase(user: _firebaseAuth.currentUser ?? user);
   }
 }
