@@ -66,7 +66,6 @@ class FirebaseAuthService implements AuthService {
 
     final googleAuth = googleUser.authentication;
     final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.idToken,
       idToken: googleAuth.idToken,
     );
     final userCredential = await _firebaseAuth.signInWithCredential(credential);
