@@ -1,50 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:paiting_by_numbers/features/home/presentation/widgets/painting_card.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 class PaintingsGrid extends StatelessWidget {
-  final List<Map<String, dynamic>> items;
-
-  const PaintingsGrid({super.key, required this.items});
+  const PaintingsGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final leftColumnItems = <Widget>[];
-    final rightColumnItems = <Widget>[];
+    final theme = ShadTheme.of(context);
+    final colorScheme = theme.colorScheme;
 
-    for (var i = 0; i < items.length; i++) {
-      final item = items[i];
-      final card = PaintingCard(
-        title: item['title'] as String,
-        author: item['author'] as String,
-        year: item['year'] as String,
-        imageHeight: item['imageHeight'] as double,
-      );
-
-      if (i % 2 == 0) {
-        leftColumnItems.add(card);
-        leftColumnItems.add(16.verticalSpace);
-      } else {
-        rightColumnItems.add(card);
-        rightColumnItems.add(16.verticalSpace);
-      }
-    }
-
-    // Adding an extra space at the end to account for the bottom navigation bar
-    return SingleChildScrollView(
-      padding: EdgeInsets.only(
-        left: 16.w,
-        right: 16.w,
-        top: 8.h,
-        bottom: 120.h,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(child: Column(children: leftColumnItems)),
-          16.horizontalSpace,
-          Expanded(child: Column(children: rightColumnItems)),
-        ],
+    return SliverFillRemaining(
+      hasScrollBody: false,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 48.h),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Beautiful icon container
+              Container(
+                padding: EdgeInsets.all(24.r),
+                decoration: BoxDecoration(
+                  color: colorScheme.muted.withValues(alpha: 0.3),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: colorScheme.border.withValues(alpha: 0.5),
+                  ),
+                ),
+                child: Icon(
+                  LucideIcons.palette,
+                  size: 48.r,
+                  color: colorScheme.primary,
+                ),
+              ),
+              24.verticalSpace,
+              // Title
+              Text(
+                'No Masterpieces Yet',
+                style: theme.textTheme.large.copyWith(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18.sp,
+                  color: colorScheme.foreground,
+                  letterSpacing: -0.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              8.verticalSpace,
+              // Subtitle
+              Text(
+                'Browse historical artworks in the Explore tab, start coloring, and your completed paintings will appear here!',
+                style: theme.textTheme.muted.copyWith(
+                  fontSize: 13.sp,
+                  color: colorScheme.mutedForeground,
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              32.verticalSpace,
+            ],
+          ),
+        ),
       ),
     );
   }

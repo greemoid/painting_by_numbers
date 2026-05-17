@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:dio/dio.dart' as _i361;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
@@ -25,6 +26,7 @@ import 'package:paiting_by_numbers/app/ui/theme/state/theme_cubit.dart'
     as _i747;
 import 'package:paiting_by_numbers/core/app_flow/session/session_manager.dart'
     as _i685;
+import 'package:paiting_by_numbers/core/di/api_module.dart' as _i276;
 import 'package:paiting_by_numbers/core/di/firebase_module.dart' as _i83;
 import 'package:paiting_by_numbers/core/di/modules/app_module.dart' as _i787;
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart'
@@ -63,6 +65,16 @@ import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/s
     as _i693;
 import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/verify_email/verify_email_cubit.dart'
     as _i780;
+import 'package:paiting_by_numbers/features/home/data/api/paintings_api.dart'
+    as _i461;
+import 'package:paiting_by_numbers/features/home/data/repositories/paintings_repository_impl.dart'
+    as _i376;
+import 'package:paiting_by_numbers/features/home/domain/repositories/paintings_repository.dart'
+    as _i419;
+import 'package:paiting_by_numbers/features/home/domain/use_cases/get_highlighted_paintings_use_case.dart'
+    as _i187;
+import 'package:paiting_by_numbers/features/home/presentation/state/explore_paintings_cubit.dart'
+    as _i445;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -71,10 +83,12 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final apiModule = _$ApiModule();
     final firebaseModule = _$FirebaseModule();
     final appModule = _$AppModule();
     gh.lazySingleton<_i197.SessionCubit>(() => _i197.SessionCubit());
     gh.lazySingleton<_i747.ThemeCubit>(() => _i747.ThemeCubit());
+    gh.lazySingleton<_i361.Dio>(() => apiModule.dio);
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.lazySingleton<_i558.FlutterSecureStorage>(() => appModule.secureStorage);
@@ -82,11 +96,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i161.AppFlowCubit>(
       () => _i161.AppFlowCubit(gh<_i197.SessionCubit>()),
     );
+    gh.lazySingleton<_i461.PaintingsApi>(
+      () => apiModule.getPaintingsApi(gh<_i361.Dio>()),
+    );
     gh.lazySingleton<_i664.AuthService>(
       () => _i46.FirebaseAuthService(
         gh<_i59.FirebaseAuth>(),
         gh<_i116.GoogleSignIn>(),
       ),
+    );
+    gh.lazySingleton<_i419.PaintingsRepository>(
+      () => _i376.PaintingsRepositoryImpl(gh<_i461.PaintingsApi>()),
     );
     gh.lazySingleton<_i729.AuthRepository>(
       () => _i602.AuthRepositoryImpl(gh<_i664.AuthService>()),
@@ -125,6 +145,10 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i519.FailureNotifier>(),
       ),
     );
+    gh.factory<_i187.GetHighlightedPaintingsUseCase>(
+      () =>
+          _i187.GetHighlightedPaintingsUseCase(gh<_i419.PaintingsRepository>()),
+    );
     gh.lazySingleton<_i685.SessionManager>(
       () => _i143.SessionManagerImpl(
         gh<_i197.SessionCubit>(),
@@ -156,9 +180,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i909.SessionInitializer>(
       () => _i909.SessionInitializer(gh<_i685.SessionManager>()),
     );
+    gh.factory<_i445.ExplorePaintingsCubit>(
+      () => _i445.ExplorePaintingsCubit(
+        gh<_i187.GetHighlightedPaintingsUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
     return this;
   }
 }
+
+class _$ApiModule extends _i276.ApiModule {}
 
 class _$FirebaseModule extends _i83.FirebaseModule {}
 
