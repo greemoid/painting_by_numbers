@@ -26,6 +26,7 @@ import 'package:paiting_by_numbers/app/ui/theme/state/theme_cubit.dart'
     as _i747;
 import 'package:paiting_by_numbers/core/app_flow/session/session_manager.dart'
     as _i685;
+import 'package:paiting_by_numbers/core/config/env_config.dart' as _i711;
 import 'package:paiting_by_numbers/core/di/api_module.dart' as _i276;
 import 'package:paiting_by_numbers/core/di/firebase_module.dart' as _i83;
 import 'package:paiting_by_numbers/core/di/modules/app_module.dart' as _i787;
@@ -83,16 +84,17 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final apiModule = _$ApiModule();
     final firebaseModule = _$FirebaseModule();
     final appModule = _$AppModule();
+    final apiModule = _$ApiModule();
     gh.lazySingleton<_i197.SessionCubit>(() => _i197.SessionCubit());
     gh.lazySingleton<_i747.ThemeCubit>(() => _i747.ThemeCubit());
-    gh.lazySingleton<_i361.Dio>(() => apiModule.dio);
+    gh.lazySingleton<_i711.EnvConfig>(() => _i711.EnvConfig.fromDotenv());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.lazySingleton<_i558.FlutterSecureStorage>(() => appModule.secureStorage);
     gh.lazySingleton<_i519.FailureNotifier>(() => _i519.FailureNotifier());
+    gh.lazySingleton<_i361.Dio>(() => apiModule.dio(gh<_i711.EnvConfig>()));
     gh.lazySingleton<_i161.AppFlowCubit>(
       () => _i161.AppFlowCubit(gh<_i197.SessionCubit>()),
     );
@@ -190,8 +192,8 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$ApiModule extends _i276.ApiModule {}
-
 class _$FirebaseModule extends _i83.FirebaseModule {}
 
 class _$AppModule extends _i787.AppModule {}
+
+class _$ApiModule extends _i276.ApiModule {}
