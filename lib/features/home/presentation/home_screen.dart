@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paiting_by_numbers/app/ui/theme/borders/app_border_radiuses.dart';
@@ -5,6 +6,7 @@ import 'package:paiting_by_numbers/core/ui/ui_kit/app_bar/common_app_bar.dart';
 import 'package:paiting_by_numbers/features/home/presentation/widgets/explore_paintings_grid.dart';
 import 'package:paiting_by_numbers/features/home/presentation/widgets/paintings_grid.dart';
 import 'package:paiting_by_numbers/features/home/utils/home_tab.dart';
+import 'package:paiting_by_numbers/resources/gen/locale_keys.g.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: colorScheme.background,
-      appBar: const CommonAppBar(title: 'Gallery', showBottomBorder: false),
+      appBar: CommonAppBar(title: LocaleKeys.home_title.tr(), showBottomBorder: false),
       body: CustomScrollView(
         slivers: [
           16.verticalSpace.toSliver(),
@@ -52,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ShadTab(
                       value: HomeTab.myPaintings,
                       child: Text(
-                        'My Paintings',
+                        LocaleKeys.home_my_paintings.tr(),
                         style: theme.textTheme.small.copyWith(
                           fontWeight: FontWeight.w600,
                           height: 1,
@@ -62,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ShadTab(
                       value: HomeTab.explore,
                       child: Text(
-                        'Explore',
+                        LocaleKeys.home_explore.tr(),
                         style: theme.textTheme.small.copyWith(
                           fontWeight: FontWeight.w600,
                           height: 1,

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paiting_by_numbers/resources/gen/locale_keys.g.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class PaintingsGrid extends StatelessWidget {
@@ -37,7 +39,7 @@ class PaintingsGrid extends StatelessWidget {
               24.verticalSpace,
               // Title
               Text(
-                'No Masterpieces Yet',
+                LocaleKeys.home_no_masterpieces_title.tr(),
                 style: theme.textTheme.large.copyWith(
                   fontWeight: FontWeight.w700,
                   fontSize: 18.sp,
@@ -49,7 +51,7 @@ class PaintingsGrid extends StatelessWidget {
               8.verticalSpace,
               // Subtitle
               Text(
-                'Browse historical artworks in the Explore tab, start coloring, and your completed paintings will appear here!',
+                LocaleKeys.home_no_masterpieces_subtitle.tr(),
                 style: theme.textTheme.muted.copyWith(
                   fontSize: 13.sp,
                   color: colorScheme.mutedForeground,
