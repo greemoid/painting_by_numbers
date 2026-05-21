@@ -59,6 +59,8 @@ abstract class  LocaleKeys {
   static const home_explore = 'home.explore';
   static const home_no_masterpieces_title = 'home.no_masterpieces_title';
   static const home_no_masterpieces_subtitle = 'home.no_masterpieces_subtitle';
+  static const home_load_more_failed = 'home.load_more_failed';
+  static const home_retry = 'home.retry';
   static const home = 'home';
 
 }

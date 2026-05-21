@@ -58,6 +58,8 @@
         "my_paintings": "My Paintings",
         "explore": "Explore",
         "no_masterpieces_title": "No Masterpieces Yet",
-        "no_masterpieces_subtitle": "Browse historical artworks in the Explore tab, start coloring, and your completed paintings will appear here!"
+        "no_masterpieces_subtitle": "Browse historical artworks in the Explore tab, start coloring, and your completed paintings will appear here!",
+        "load_more_failed": "Failed to load more paintings",
+        "retry": "Retry"
     }
 }

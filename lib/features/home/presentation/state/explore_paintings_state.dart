@@ -13,6 +13,7 @@ sealed class ExplorePaintingsState with _$ExplorePaintingsState {
 
   const factory ExplorePaintingsState.data({
     required PagingState<int, Painting> pagingState,
+    @Default([]) List<Painting> items,
     @Default(0) int total,
   }) = _Data;
 

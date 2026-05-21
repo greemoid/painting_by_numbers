@@ -50,6 +50,7 @@ class ExplorePaintingsCubit extends BaseCubit<ExplorePaintingsState> {
         emit(
           ExplorePaintingsState.data(
             pagingState: d.pagingState.copyWith(isLoading: true, error: null),
+            items: d.items,
             total: knownTotal,
           ),
         );
@@ -60,22 +61,24 @@ class ExplorePaintingsCubit extends BaseCubit<ExplorePaintingsState> {
     if (!shouldFetch) return;
 
     await execute<PaintingsPage>(
-      useCase: () => _getHighlightedPaintingsUseCase(
-        skip: nextSkip,
-        limit: _pageSize,
-      ),
+      useCase: () =>
+          _getHighlightedPaintingsUseCase(skip: nextSkip, limit: _pageSize),
       onSuccess: (page) {
         final allLoaded = loadedCount + page.items.length;
         final hasNext = allLoaded < page.total;
 
+        final newPages = [...currentPages, page.items];
+        final newItems = newPages.expand((e) => e).toList();
+
         emit(
           ExplorePaintingsState.data(
             pagingState: PagingState<int, Painting>(
-              pages: [...currentPages, page.items],
+              pages: newPages,
               keys: [...currentKeys, nextSkip],
               hasNextPage: hasNext,
               isLoading: false,
             ),
+            items: newItems,
             total: page.total,
           ),
         );
@@ -91,6 +94,7 @@ class ExplorePaintingsCubit extends BaseCubit<ExplorePaintingsState> {
                 error: failure,
                 isLoading: false,
               ),
+              items: d.items,
               total: d.total,
             ),
           ),

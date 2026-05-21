@@ -125,12 +125,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( PagingState<int, Painting> pagingState,  int total)?  data,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( PagingState<int, Painting> pagingState,  List<Painting> items,  int total)?  data,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Data() when data != null:
-return data(_that.pagingState,_that.total);case _Error() when error != null:
+return data(_that.pagingState,_that.items,_that.total);case _Error() when error != null:
 return error(_that.failure);case _:
   return orElse();
 
@@ -149,12 +149,12 @@ return error(_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( PagingState<int, Painting> pagingState,  int total)  data,required TResult Function( Failure failure)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( PagingState<int, Painting> pagingState,  List<Painting> items,  int total)  data,required TResult Function( Failure failure)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Data():
-return data(_that.pagingState,_that.total);case _Error():
+return data(_that.pagingState,_that.items,_that.total);case _Error():
 return error(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -169,12 +169,12 @@ return error(_that.failure);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( PagingState<int, Painting> pagingState,  int total)?  data,TResult? Function( Failure failure)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( PagingState<int, Painting> pagingState,  List<Painting> items,  int total)?  data,TResult? Function( Failure failure)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Data() when data != null:
-return data(_that.pagingState,_that.total);case _Error() when error != null:
+return data(_that.pagingState,_that.items,_that.total);case _Error() when error != null:
 return error(_that.failure);case _:
   return null;
 
@@ -251,10 +251,17 @@ String toString() {
 
 
 class _Data implements ExplorePaintingsState {
-  const _Data({required this.pagingState, this.total = 0});
+  const _Data({required this.pagingState, final  List<Painting> items = const [], this.total = 0}): _items = items;
   
 
  final  PagingState<int, Painting> pagingState;
+ final  List<Painting> _items;
+@JsonKey() List<Painting> get items {
+  if (_items is EqualUnmodifiableListView) return _items;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_items);
+}
+
 @JsonKey() final  int total;
 
 /// Create a copy of ExplorePaintingsState
@@ -267,16 +274,16 @@ _$DataCopyWith<_Data> get copyWith => __$DataCopyWithImpl<_Data>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Data&&(identical(other.pagingState, pagingState) || other.pagingState == pagingState)&&(identical(other.total, total) || other.total == total));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Data&&(identical(other.pagingState, pagingState) || other.pagingState == pagingState)&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.total, total) || other.total == total));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,pagingState,total);
+int get hashCode => Object.hash(runtimeType,pagingState,const DeepCollectionEquality().hash(_items),total);
 
 @override
 String toString() {
-  return 'ExplorePaintingsState.data(pagingState: $pagingState, total: $total)';
+  return 'ExplorePaintingsState.data(pagingState: $pagingState, items: $items, total: $total)';
 }
 
 
@@ -287,7 +294,7 @@ abstract mixin class _$DataCopyWith<$Res> implements $ExplorePaintingsStateCopyW
   factory _$DataCopyWith(_Data value, $Res Function(_Data) _then) = __$DataCopyWithImpl;
 @useResult
 $Res call({
- PagingState<int, Painting> pagingState, int total
+ PagingState<int, Painting> pagingState, List<Painting> items, int total
 });
 
 
@@ -304,10 +311,11 @@ class __$DataCopyWithImpl<$Res>
 
 /// Create a copy of ExplorePaintingsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? pagingState = null,Object? total = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? pagingState = null,Object? items = null,Object? total = null,}) {
   return _then(_Data(
 pagingState: null == pagingState ? _self.pagingState : pagingState // ignore: cast_nullable_to_non_nullable
-as PagingState<int, Painting>,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as PagingState<int, Painting>,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as List<Painting>,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
