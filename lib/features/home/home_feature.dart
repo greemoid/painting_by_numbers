@@ -1,6 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paiting_by_numbers/core/di/locator.dart';
 import 'package:paiting_by_numbers/core/feature/feature_module.dart';
 import 'package:paiting_by_numbers/features/home/navigation/home_routes.dart';
+import 'package:paiting_by_numbers/features/home/presentation/state/explore_paintings_cubit.dart';
 import 'package:paiting_by_numbers/features/home/presentation/home_screen.dart';
 
 class HomeFeature implements FeatureModule {
@@ -10,7 +13,10 @@ class HomeFeature implements FeatureModule {
   List<RouteBase> get routes => [
     GoRoute(
       path: HomeRoutes.home,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => locator<ExplorePaintingsCubit>(),
+        child: const HomeScreen(),
+      ),
     ),
   ];
 }

@@ -54,5 +54,13 @@ abstract class  LocaleKeys {
   static const verify_email_resend = 'verify_email.resend';
   static const verify_email_cancel = 'verify_email.cancel';
   static const verify_email = 'verify_email';
+  static const home_title = 'home.title';
+  static const home_my_paintings = 'home.my_paintings';
+  static const home_explore = 'home.explore';
+  static const home_no_masterpieces_title = 'home.no_masterpieces_title';
+  static const home_no_masterpieces_subtitle = 'home.no_masterpieces_subtitle';
+  static const home_load_more_failed = 'home.load_more_failed';
+  static const home_retry = 'home.retry';
+  static const home = 'home';
 
 }

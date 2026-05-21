@@ -28,6 +28,7 @@ class MainNavigationScreen extends StatelessWidget {
         layout: BottomBarLayout(
           borderRadius: BorderRadius.all(AppBorderRadiuses.rounded3xl),
         ),
+        showIcon: false,
         body: navigationShell,
         child: Container(
           decoration: BoxDecoration(
