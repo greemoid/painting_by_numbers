@@ -18,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeTab _currentTab = HomeTab.myPaintings;
+  bool _exploreTabVisited = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: ShadTabs<HomeTab>(
                 value: _currentTab,
-                onChanged: (v) => setState(() => _currentTab = v),
+                onChanged: (v) => setState(() {
+                  _currentTab = v;
+                  if (v == HomeTab.explore) {
+                    _exploreTabVisited = true;
+                  }
+                }),
                 gap: 0,
                 contentConstraints: BoxConstraints.tight(Size.zero),
                 tabBarConstraints: BoxConstraints(maxWidth: 1.sw - 40.w),
@@ -81,9 +87,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: IndexedStack(
               index: _currentTab == HomeTab.myPaintings ? 0 : 1,
-              children: const [
-                PaintingsGrid(),
-                ExplorePaintingsGrid(),
+              children: [
+                const PaintingsGrid(),
+                _exploreTabVisited
+                    ? const ExplorePaintingsGrid()
+                    : const SizedBox.shrink(),
               ],
             ),
           ),

@@ -14,9 +14,7 @@ class FilePickerServiceImpl implements FilePickerService {
   FilePickerServiceImpl(this._imagePicker);
 
   @override
-  Future<Either<Failure, File>> pickImage({
-    required ImageSource source,
-  }) async {
+  Future<Either<Failure, File>> pickImage({required ImageSource source}) async {
     try {
       final XFile? image = await _imagePicker.pickImage(source: source);
       if (image == null) return const Left(CanceledByUserFailure());

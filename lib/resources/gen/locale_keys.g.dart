@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const failure_network = 'failure.network';
   static const failure_unauthorized = 'failure.unauthorized';
   static const failure_server = 'failure.server';
@@ -64,17 +64,21 @@ abstract class  LocaleKeys {
   static const home_retry = 'home.retry';
   static const home = 'home';
   static const create_painting_title = 'create_painting.title';
-  static const create_painting_explanation_title = 'create_painting.explanation_title';
-  static const create_painting_explanation_description = 'create_painting.explanation_description';
+  static const create_painting_explanation_title =
+      'create_painting.explanation_title';
+  static const create_painting_explanation_description =
+      'create_painting.explanation_description';
   static const create_painting_pick_image = 'create_painting.pick_image';
   static const create_painting_change_image = 'create_painting.change_image';
-  static const create_painting_quantization_type = 'create_painting.quantization_type';
-  static const create_painting_select_detail_level = 'create_painting.select_detail_level';
+  static const create_painting_quantization_type =
+      'create_painting.quantization_type';
+  static const create_painting_select_detail_level =
+      'create_painting.select_detail_level';
   static const create_painting_type_many = 'create_painting.type_many';
   static const create_painting_type_few = 'create_painting.type_few';
   static const create_painting_type_custom = 'create_painting.type_custom';
   static const create_painting_colors_count = 'create_painting.colors_count';
-  static const create_painting_start_quantization = 'create_painting.start_quantization';
+  static const create_painting_start_quantization =
+      'create_painting.start_quantization';
   static const create_painting = 'create_painting';
-
 }

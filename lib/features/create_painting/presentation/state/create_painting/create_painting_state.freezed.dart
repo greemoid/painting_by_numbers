@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CreatePaintingState {
 
- QuantizationType get quantizationType; int get customColorsCount; bool get isQuantizing;
+ QuantizationType get quantizationType; int get customColorsCount; bool get isQuantizing; QuantizationResult? get quantizationResult;
 /// Create a copy of CreatePaintingState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CreatePaintingStateCopyWith<CreatePaintingState> get copyWith => _$CreatePainti
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreatePaintingState&&(identical(other.quantizationType, quantizationType) || other.quantizationType == quantizationType)&&(identical(other.customColorsCount, customColorsCount) || other.customColorsCount == customColorsCount)&&(identical(other.isQuantizing, isQuantizing) || other.isQuantizing == isQuantizing));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreatePaintingState&&(identical(other.quantizationType, quantizationType) || other.quantizationType == quantizationType)&&(identical(other.customColorsCount, customColorsCount) || other.customColorsCount == customColorsCount)&&(identical(other.isQuantizing, isQuantizing) || other.isQuantizing == isQuantizing)&&(identical(other.quantizationResult, quantizationResult) || other.quantizationResult == quantizationResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,quantizationType,customColorsCount,isQuantizing);
+int get hashCode => Object.hash(runtimeType,quantizationType,customColorsCount,isQuantizing,quantizationResult);
 
 @override
 String toString() {
-  return 'CreatePaintingState(quantizationType: $quantizationType, customColorsCount: $customColorsCount, isQuantizing: $isQuantizing)';
+  return 'CreatePaintingState(quantizationType: $quantizationType, customColorsCount: $customColorsCount, isQuantizing: $isQuantizing, quantizationResult: $quantizationResult)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CreatePaintingStateCopyWith<$Res>  {
   factory $CreatePaintingStateCopyWith(CreatePaintingState value, $Res Function(CreatePaintingState) _then) = _$CreatePaintingStateCopyWithImpl;
 @useResult
 $Res call({
- QuantizationType quantizationType, int customColorsCount, bool isQuantizing
+ QuantizationType quantizationType, int customColorsCount, bool isQuantizing, QuantizationResult? quantizationResult
 });
 
 
@@ -62,12 +62,13 @@ class _$CreatePaintingStateCopyWithImpl<$Res>
 
 /// Create a copy of CreatePaintingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? quantizationType = null,Object? customColorsCount = null,Object? isQuantizing = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? quantizationType = null,Object? customColorsCount = null,Object? isQuantizing = null,Object? quantizationResult = freezed,}) {
   return _then(_self.copyWith(
 quantizationType: null == quantizationType ? _self.quantizationType : quantizationType // ignore: cast_nullable_to_non_nullable
 as QuantizationType,customColorsCount: null == customColorsCount ? _self.customColorsCount : customColorsCount // ignore: cast_nullable_to_non_nullable
 as int,isQuantizing: null == isQuantizing ? _self.isQuantizing : isQuantizing // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,quantizationResult: freezed == quantizationResult ? _self.quantizationResult : quantizationResult // ignore: cast_nullable_to_non_nullable
+as QuantizationResult?,
   ));
 }
 
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( QuantizationType quantizationType,  int customColorsCount,  bool isQuantizing)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( QuantizationType quantizationType,  int customColorsCount,  bool isQuantizing,  QuantizationResult? quantizationResult)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CreatePaintingState() when $default != null:
-return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizing);case _:
+return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizing,_that.quantizationResult);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizin
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( QuantizationType quantizationType,  int customColorsCount,  bool isQuantizing)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( QuantizationType quantizationType,  int customColorsCount,  bool isQuantizing,  QuantizationResult? quantizationResult)  $default,) {final _that = this;
 switch (_that) {
 case _CreatePaintingState():
-return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizing);case _:
+return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizing,_that.quantizationResult);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizin
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( QuantizationType quantizationType,  int customColorsCount,  bool isQuantizing)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( QuantizationType quantizationType,  int customColorsCount,  bool isQuantizing,  QuantizationResult? quantizationResult)?  $default,) {final _that = this;
 switch (_that) {
 case _CreatePaintingState() when $default != null:
-return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizing);case _:
+return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizing,_that.quantizationResult);case _:
   return null;
 
 }
@@ -208,12 +209,13 @@ return $default(_that.quantizationType,_that.customColorsCount,_that.isQuantizin
 
 
 class _CreatePaintingState implements CreatePaintingState {
-  const _CreatePaintingState({this.quantizationType = QuantizationType.many, this.customColorsCount = 25, this.isQuantizing = false});
+  const _CreatePaintingState({this.quantizationType = QuantizationType.many, this.customColorsCount = 25, this.isQuantizing = false, this.quantizationResult});
   
 
 @override@JsonKey() final  QuantizationType quantizationType;
 @override@JsonKey() final  int customColorsCount;
 @override@JsonKey() final  bool isQuantizing;
+@override final  QuantizationResult? quantizationResult;
 
 /// Create a copy of CreatePaintingState
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +227,16 @@ _$CreatePaintingStateCopyWith<_CreatePaintingState> get copyWith => __$CreatePai
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreatePaintingState&&(identical(other.quantizationType, quantizationType) || other.quantizationType == quantizationType)&&(identical(other.customColorsCount, customColorsCount) || other.customColorsCount == customColorsCount)&&(identical(other.isQuantizing, isQuantizing) || other.isQuantizing == isQuantizing));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreatePaintingState&&(identical(other.quantizationType, quantizationType) || other.quantizationType == quantizationType)&&(identical(other.customColorsCount, customColorsCount) || other.customColorsCount == customColorsCount)&&(identical(other.isQuantizing, isQuantizing) || other.isQuantizing == isQuantizing)&&(identical(other.quantizationResult, quantizationResult) || other.quantizationResult == quantizationResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,quantizationType,customColorsCount,isQuantizing);
+int get hashCode => Object.hash(runtimeType,quantizationType,customColorsCount,isQuantizing,quantizationResult);
 
 @override
 String toString() {
-  return 'CreatePaintingState(quantizationType: $quantizationType, customColorsCount: $customColorsCount, isQuantizing: $isQuantizing)';
+  return 'CreatePaintingState(quantizationType: $quantizationType, customColorsCount: $customColorsCount, isQuantizing: $isQuantizing, quantizationResult: $quantizationResult)';
 }
 
 
@@ -245,7 +247,7 @@ abstract mixin class _$CreatePaintingStateCopyWith<$Res> implements $CreatePaint
   factory _$CreatePaintingStateCopyWith(_CreatePaintingState value, $Res Function(_CreatePaintingState) _then) = __$CreatePaintingStateCopyWithImpl;
 @override @useResult
 $Res call({
- QuantizationType quantizationType, int customColorsCount, bool isQuantizing
+ QuantizationType quantizationType, int customColorsCount, bool isQuantizing, QuantizationResult? quantizationResult
 });
 
 
@@ -262,12 +264,13 @@ class __$CreatePaintingStateCopyWithImpl<$Res>
 
 /// Create a copy of CreatePaintingState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? quantizationType = null,Object? customColorsCount = null,Object? isQuantizing = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? quantizationType = null,Object? customColorsCount = null,Object? isQuantizing = null,Object? quantizationResult = freezed,}) {
   return _then(_CreatePaintingState(
 quantizationType: null == quantizationType ? _self.quantizationType : quantizationType // ignore: cast_nullable_to_non_nullable
 as QuantizationType,customColorsCount: null == customColorsCount ? _self.customColorsCount : customColorsCount // ignore: cast_nullable_to_non_nullable
 as int,isQuantizing: null == isQuantizing ? _self.isQuantizing : isQuantizing // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,quantizationResult: freezed == quantizationResult ? _self.quantizationResult : quantizationResult // ignore: cast_nullable_to_non_nullable
+as QuantizationResult?,
   ));
 }
 

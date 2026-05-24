@@ -1,4 +1,1 @@
-enum HomeTab {
-  myPaintings,
-  explore,
-}
+enum HomeTab { myPaintings, explore }

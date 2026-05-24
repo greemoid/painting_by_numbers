@@ -13,6 +13,5 @@ class GetHighlightedPaintingsUseCase {
   Future<Either<Failure, PaintingsPage>> call({
     int skip = 0,
     int limit = 20,
-  }) async =>
-      _repository.getHighlightedPaintings(skip: skip, limit: limit);
+  }) async => _repository.getHighlightedPaintings(skip: skip, limit: limit);
 }

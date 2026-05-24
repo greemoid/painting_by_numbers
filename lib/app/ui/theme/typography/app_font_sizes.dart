@@ -1,7 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppFontSizes {
-
   /// 8
   static double get xxs => 8.spMin;
 

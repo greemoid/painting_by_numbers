@@ -11,10 +11,7 @@ import 'package:paiting_by_numbers/resources/gen/locale_keys.g.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class ImagePickerArea extends StatelessWidget {
-  const ImagePickerArea({
-    required this.state,
-    super.key,
-  });
+  const ImagePickerArea({required this.state, super.key});
 
   final UploadImageState state;
 
@@ -62,11 +59,17 @@ class ImagePickerArea extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(LucideIcons.upload, size: 48.r, color: colorScheme.mutedForeground),
+            Icon(
+              LucideIcons.upload,
+              size: 48.r,
+              color: colorScheme.mutedForeground,
+            ),
             16.verticalSpace,
             Text(
               LocaleKeys.create_painting_pick_image.tr(),
-              style: theme.textTheme.large.copyWith(color: colorScheme.foreground),
+              style: theme.textTheme.large.copyWith(
+                color: colorScheme.foreground,
+              ),
             ),
           ],
         ),

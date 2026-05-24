@@ -10,10 +10,8 @@ import 'package:paiting_by_numbers/features/create_painting/presentation/state/u
 class UploadImageCubit extends BaseCubit<UploadImageState> {
   final FilePickerService _filePickerService;
 
-  UploadImageCubit(
-    this._filePickerService,
-    FailureNotifier failureNotifier,
-  ) : super(const UploadImageState(), failureNotifier);
+  UploadImageCubit(this._filePickerService, FailureNotifier failureNotifier)
+    : super(const UploadImageState(), failureNotifier);
 
   Future<void> pickImage() async {
     await execute(

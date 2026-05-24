@@ -18,7 +18,9 @@ Future<void> bootstrap() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     await EasyLocalization.ensureInitialized();
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     await GoogleSignIn.instance.initialize();
 
     await dotenv.load(fileName: '.env');

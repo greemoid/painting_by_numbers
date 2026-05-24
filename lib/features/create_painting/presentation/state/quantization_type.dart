@@ -16,4 +16,15 @@ enum QuantizationType {
         return LocaleKeys.create_painting_type_custom.tr();
     }
   }
+
+  int colorsCount([int? customValue]) {
+    switch (this) {
+      case QuantizationType.many:
+        return 24;
+      case QuantizationType.few:
+        return 12;
+      case QuantizationType.custom:
+        return customValue ?? 25;
+    }
+  }
 }

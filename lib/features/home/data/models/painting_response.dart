@@ -16,9 +16,7 @@ abstract class PaintingResponse with _$PaintingResponse {
 
 @freezed
 abstract class PaintingInfo with _$PaintingInfo {
-  const factory PaintingInfo({
-    required int total,
-  }) = _PaintingInfo;
+  const factory PaintingInfo({required int total}) = _PaintingInfo;
 
   factory PaintingInfo.fromJson(Map<String, dynamic> json) =>
       _$PaintingInfoFromJson(json);

@@ -8,6 +8,7 @@ import 'package:paiting_by_numbers/features/create_painting/presentation/state/c
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/upload_image/upload_image_cubit.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/widgets/explanation_card.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/widgets/image_picker_area.dart';
+import 'package:paiting_by_numbers/features/create_painting/presentation/widgets/quantization_result_view.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/widgets/quantization_settings.dart';
 import 'package:paiting_by_numbers/resources/gen/locale_keys.g.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -32,10 +33,10 @@ class CreatePaintingScreen extends StatelessWidget {
         title: LocaleKeys.create_painting_title.tr(),
         showBottomBorder: false,
       ),
-      body: IgnorePointer(
-        ignoring: isQuantizing,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+        child: IgnorePointer(
+          ignoring: isQuantizing,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -52,8 +53,14 @@ class CreatePaintingScreen extends StatelessWidget {
                     ? null
                     : () => context
                           .read<CreatePaintingCubit>()
-                          .startQuantization(),
+                          .startQuantization(uploadState.image!),
               ),
+              if (paintingState.quantizationResult != null) ...[
+                32.verticalSpace,
+                QuantizationResultView(
+                  result: paintingState.quantizationResult!,
+                ),
+              ],
               160.verticalSpace,
             ],
           ),

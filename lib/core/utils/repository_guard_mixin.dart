@@ -10,11 +10,7 @@ mixin RepositoryGuardMixin {
       final result = await call();
       return Right(result);
     } catch (e, stackTrace) {
-      AppLogger.error(
-        e.toString(),
-        error: e,
-        stackTrace: stackTrace,
-      );
+      AppLogger.error(e.toString(), error: e, stackTrace: stackTrace);
       return Left(FailureMapper.from(e));
     }
   }

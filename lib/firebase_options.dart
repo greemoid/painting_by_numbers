@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '794737608140',
     projectId: 'painting-by-numbers-181cd',
     storageBucket: 'painting-by-numbers-181cd.firebasestorage.app',
-    iosClientId: '794737608140-0k1qjfqirgvf0ghbqmmthhidbdqe64g8.apps.googleusercontent.com',
+    iosClientId:
+        '794737608140-0k1qjfqirgvf0ghbqmmthhidbdqe64g8.apps.googleusercontent.com',
     iosBundleId: 'com.eliahu.paitingByNumbers',
   );
 }

@@ -71,6 +71,12 @@ import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/s
     as _i693;
 import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/verify_email/verify_email_cubit.dart'
     as _i780;
+import 'package:paiting_by_numbers/features/create_painting/data/repositories/quantization_repository_impl.dart'
+    as _i266;
+import 'package:paiting_by_numbers/features/create_painting/domain/repositories/quantization_repository.dart'
+    as _i339;
+import 'package:paiting_by_numbers/features/create_painting/domain/use_cases/vectorize_image_use_case.dart'
+    as _i486;
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/create_painting/create_painting_cubit.dart'
     as _i392;
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/upload_image/upload_image_cubit.dart'
@@ -117,17 +123,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i161.AppFlowCubit>(
       () => _i161.AppFlowCubit(gh<_i197.SessionCubit>()),
     );
+    gh.lazySingleton<_i339.QuantizationRepository>(
+      () => const _i266.QuantizationRepositoryImpl(),
+    );
     gh.lazySingleton<_i461.PaintingsApi>(
       () => apiModule.getPaintingsApi(gh<_i361.Dio>()),
-    );
-    gh.factory<_i392.CreatePaintingCubit>(
-      () => _i392.CreatePaintingCubit(gh<_i519.FailureNotifier>()),
     );
     gh.lazySingleton<_i664.AuthService>(
       () => _i46.FirebaseAuthService(
         gh<_i59.FirebaseAuth>(),
         gh<_i116.GoogleSignIn>(),
       ),
+    );
+    gh.factory<_i486.VectorizeImageUseCase>(
+      () => _i486.VectorizeImageUseCase(gh<_i339.QuantizationRepository>()),
     );
     gh.lazySingleton<_i419.PaintingsRepository>(
       () => _i376.PaintingsRepositoryImpl(gh<_i461.PaintingsApi>()),
@@ -172,6 +181,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i187.GetHighlightedPaintingsUseCase>(
       () =>
           _i187.GetHighlightedPaintingsUseCase(gh<_i419.PaintingsRepository>()),
+    );
+    gh.factory<_i392.CreatePaintingCubit>(
+      () => _i392.CreatePaintingCubit(
+        gh<_i486.VectorizeImageUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
     );
     gh.lazySingleton<_i685.SessionManager>(
       () => _i143.SessionManagerImpl(
