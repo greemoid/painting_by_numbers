@@ -19,7 +19,8 @@ pub struct VectorizationResult {
 }
 
 pub async fn vectorize_image_to_svg(image_bytes: Vec<u8>, colors: u32) -> anyhow::Result<VectorizationResult> {
-    // 1. DECODE IMAGE
+    anyhow::ensure!(colors > 0, "colors must be greater than zero");
+
     let img = load_from_memory(&image_bytes)?;
 
     // 2. PREPROCESS

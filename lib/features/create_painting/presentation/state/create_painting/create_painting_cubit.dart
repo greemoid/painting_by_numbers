@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:injectable/injectable.dart';
 import 'package:paiting_by_numbers/core/bloc/base_cubit.dart';
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart';
-import 'package:paiting_by_numbers/core/ui/ui_kit/snack_bar/custom_snack_bar.dart';
 import 'package:paiting_by_numbers/features/create_painting/domain/entities/quantization_result.dart';
 import 'package:paiting_by_numbers/features/create_painting/domain/use_cases/vectorize_image_use_case.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/create_painting/create_painting_state.dart';
@@ -37,12 +36,8 @@ class CreatePaintingCubit extends BaseCubit<CreatePaintingState> {
         final bytes = await image.readAsBytes();
         return _vectorizeImageUseCase(imageBytes: bytes, colors: colorsCount);
       },
-      onSuccess: (result) {
-        safeEmit(state.copyWith(quantizationResult: result));
-        CustomSnackBar.showSuccessSnackBar(
-          message: 'Картину успішно згенеровано!',
-        );
-      },
+      onSuccess: (result) =>
+          safeEmit(state.copyWith(quantizationResult: result)),
     );
   }
 }

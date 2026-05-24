@@ -1,9 +1,7 @@
-import 'dart:isolate';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paiting_by_numbers/core/failures/failure.dart';
 import 'package:paiting_by_numbers/core/native/rust/api/simple.dart' as rust;
-import 'package:paiting_by_numbers/core/native/rust/frb_generated.dart';
 import 'package:paiting_by_numbers/core/utils/repository_guard_mixin.dart';
 import 'package:paiting_by_numbers/features/create_painting/domain/entities/quantization_result.dart';
 import 'package:paiting_by_numbers/features/create_painting/domain/repositories/quantization_repository.dart';
@@ -18,23 +16,16 @@ class QuantizationRepositoryImpl
   Future<Either<Failure, QuantizationResult>> vectorizeImage({
     required List<int> imageBytes,
     required int colors,
-  }) => guard(
-    () => Isolate.run(() async {
-      await RustLib.init();
+  }) => guard(() async {
+    final result = await rust.vectorizeImageToSvg(
+      imageBytes: imageBytes,
+      colors: colors,
+    );
 
-      final result = await rust.vectorizeImageToSvg(
-        imageBytes: imageBytes,
-        colors: colors,
-      );
+    final palette = result.palette
+        .map((entry) => PaletteColor(rgb: entry.rgb.toList(), hex: entry.hex))
+        .toList();
 
-      final palette = result.palette
-          .map((entry) => PaletteColor(rgb: entry.rgb.toList(), hex: entry.hex))
-          .toList();
-
-      return QuantizationResult(
-        svgContent: result.svgContent,
-        palette: palette,
-      );
-    }),
-  );
+    return QuantizationResult(svgContent: result.svgContent, palette: palette);
+  });
 }
