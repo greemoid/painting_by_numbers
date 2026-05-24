@@ -117,8 +117,8 @@ class _PaintingShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Shimmer.fromColors(
-        baseColor: baseColor,
-        highlightColor: highlightColor,
-        child: const ColoredBox(color: Colors.white),
-      );
+    baseColor: baseColor,
+    highlightColor: highlightColor,
+    child: const ColoredBox(color: Colors.white),
+  );
 }

@@ -91,3 +91,8 @@ class GoogleUserMismatchFailure extends Failure {
   const GoogleUserMismatchFailure()
     : super(messageKey: LocaleKeys.failure_google_user_mismatch);
 }
+
+class FileTooLargeFailure extends Failure {
+  const FileTooLargeFailure()
+    : super(messageKey: LocaleKeys.failure_file_too_large);
+}

@@ -23,7 +23,8 @@ class ExplorePaintingsShimmerGrid extends StatelessWidget {
         crossAxisSpacing: 4.w,
         childCount: 10,
         itemBuilder: (context, index) => _ShimmerCard(
-          aspectRatio: _shimmerAspectRatios[index % _shimmerAspectRatios.length],
+          aspectRatio:
+              _shimmerAspectRatios[index % _shimmerAspectRatios.length],
           baseColor: colorScheme.muted.withValues(alpha: 0.5),
           highlightColor: colorScheme.muted,
         ),

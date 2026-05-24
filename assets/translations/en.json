@@ -17,7 +17,8 @@
         "google_misconfigured": "Service configuration error. Contact support.",
         "google_ui_unavailable": "System error: Could not display sign-in.",
         "google_user_mismatch": "Account mismatch detected.",
-        "canceled": "Sign-in canceled."
+        "canceled": "Sign-in canceled.",
+        "file_too_large": "The selected file is too large. Please choose a smaller image."
     },
     "auth": {
         "sign_in": "Sign In",
@@ -61,5 +62,19 @@
         "no_masterpieces_subtitle": "Browse historical artworks in the Explore tab, start coloring, and your completed paintings will appear here!",
         "load_more_failed": "Failed to load more paintings",
         "retry": "Retry"
+    },
+    "create_painting": {
+        "title": "Turn Photo to Painting",
+        "explanation_title": "How it works",
+        "explanation_description": "Upload any photo, select your preferred level of detail, and we will automatically transform it into a personalized color-by-number canvas for you to paint!",
+        "pick_image": "Choose a photo to begin",
+        "change_image": "Choose another photo",
+        "quantization_type": "Detail Level",
+        "select_detail_level": "Select detail level...",
+        "type_many": "High Detail (Rich colors)",
+        "type_few": "Simple (Fewer colors, easier to paint)",
+        "type_custom": "Custom (Adjust palette size)",
+        "colors_count": "Palette size: {} colors",
+        "start_quantization": "Prepare Canvas"
     }
 }

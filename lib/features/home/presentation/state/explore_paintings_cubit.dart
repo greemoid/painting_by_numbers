@@ -18,6 +18,11 @@ class ExplorePaintingsCubit extends BaseCubit<ExplorePaintingsState> {
     FailureNotifier failureNotifier,
   ) : super(const ExplorePaintingsState.initial(), failureNotifier);
 
+  Future<void> refresh() async {
+    emit(const ExplorePaintingsState.initial());
+    await fetchNextPage();
+  }
+
   Future<void> fetchNextPage() async {
     final currentState = state;
 

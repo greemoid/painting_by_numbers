@@ -16,4 +16,3 @@ class FailureMapper {
     return DioErrorMapper.map(error);
   }
 }
-

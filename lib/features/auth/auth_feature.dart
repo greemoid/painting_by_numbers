@@ -17,34 +17,33 @@ final class AuthFeature implements FeatureModule {
 
   @override
   List<RouteBase> get routes => [
-        GoRoute(
-          path: AuthRoutes.signIn,
-          builder: (context, state) => BlocProvider(
-            create: (context) => locator<SignInCubit>(),
-            child: const SignInScreen(),
-          ),
-        ),
-        GoRoute(
-          path: AuthRoutes.signUp,
-          builder: (context, state) => BlocProvider(
-            create: (context) => locator<SignUpCubit>(),
-            child: const SignUpScreen(),
-          ),
-        ),
-        GoRoute(
-          path: AuthRoutes.forgotPassword,
-          builder: (context, state) => BlocProvider(
-            create: (context) => locator<ForgotPasswordCubit>(),
-            child: const ForgotPasswordScreen(),
-          ),
-        ),
-        GoRoute(
-          path: AuthRoutes.verifyEmail,
-          builder: (context, state) => BlocProvider(
-            create: (context) => locator<VerifyEmailCubit>(),
-            child: const VerifyEmailScreen(),
-          ),
-        ),
-      ];
+    GoRoute(
+      path: AuthRoutes.signIn,
+      builder: (context, state) => BlocProvider(
+        create: (context) => locator<SignInCubit>(),
+        child: const SignInScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AuthRoutes.signUp,
+      builder: (context, state) => BlocProvider(
+        create: (context) => locator<SignUpCubit>(),
+        child: const SignUpScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AuthRoutes.forgotPassword,
+      builder: (context, state) => BlocProvider(
+        create: (context) => locator<ForgotPasswordCubit>(),
+        child: const ForgotPasswordScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AuthRoutes.verifyEmail,
+      builder: (context, state) => BlocProvider(
+        create: (context) => locator<VerifyEmailCubit>(),
+        child: const VerifyEmailScreen(),
+      ),
+    ),
+  ];
 }
-

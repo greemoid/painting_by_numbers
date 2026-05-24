@@ -12,14 +12,18 @@ import 'package:paiting_by_numbers/app/router/app_router.dart';
 import 'package:paiting_by_numbers/app/ui/bootstrap_error_app.dart';
 import 'package:paiting_by_numbers/core/config/env_config.dart';
 import 'package:paiting_by_numbers/core/di/locator.dart';
+import 'package:paiting_by_numbers/core/native/rust/frb_generated.dart';
 import 'package:paiting_by_numbers/firebase_options.dart';
 
 Future<void> bootstrap() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     await EasyLocalization.ensureInitialized();
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     await GoogleSignIn.instance.initialize();
+    await RustLib.init();
 
     await dotenv.load(fileName: '.env');
 
