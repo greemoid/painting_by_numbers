@@ -14,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
+import 'package:image_picker/image_picker.dart' as _i183;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:paiting_by_numbers/app/app_flow/app_flow_cubit.dart' as _i161;
 import 'package:paiting_by_numbers/app/app_flow/session/session_cubit.dart'
@@ -32,6 +33,10 @@ import 'package:paiting_by_numbers/core/di/firebase_module.dart' as _i83;
 import 'package:paiting_by_numbers/core/di/modules/app_module.dart' as _i787;
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart'
     as _i519;
+import 'package:paiting_by_numbers/core/services/file_picker/file_picker_service.dart'
+    as _i954;
+import 'package:paiting_by_numbers/core/services/file_picker/file_picker_service_impl.dart'
+    as _i351;
 import 'package:paiting_by_numbers/features/auth/navigation/data/repository/auth_repository_impl.dart'
     as _i602;
 import 'package:paiting_by_numbers/features/auth/navigation/data/services/auth_service.dart'
@@ -66,6 +71,10 @@ import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/s
     as _i693;
 import 'package:paiting_by_numbers/features/auth/navigation/presentation/state/verify_email/verify_email_cubit.dart'
     as _i780;
+import 'package:paiting_by_numbers/features/create_painting/presentation/state/create_painting/create_painting_cubit.dart'
+    as _i392;
+import 'package:paiting_by_numbers/features/create_painting/presentation/state/upload_image/upload_image_cubit.dart'
+    as _i112;
 import 'package:paiting_by_numbers/features/home/data/api/paintings_api.dart'
     as _i461;
 import 'package:paiting_by_numbers/features/home/data/repositories/paintings_repository_impl.dart'
@@ -93,13 +102,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.lazySingleton<_i558.FlutterSecureStorage>(() => appModule.secureStorage);
+    gh.lazySingleton<_i183.ImagePicker>(() => appModule.imagePicker);
     gh.lazySingleton<_i519.FailureNotifier>(() => _i519.FailureNotifier());
+    gh.lazySingleton<_i954.FilePickerService>(
+      () => _i351.FilePickerServiceImpl(gh<_i183.ImagePicker>()),
+    );
+    gh.factory<_i112.UploadImageCubit>(
+      () => _i112.UploadImageCubit(
+        gh<_i954.FilePickerService>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
     gh.lazySingleton<_i361.Dio>(() => apiModule.dio(gh<_i711.EnvConfig>()));
     gh.lazySingleton<_i161.AppFlowCubit>(
       () => _i161.AppFlowCubit(gh<_i197.SessionCubit>()),
     );
     gh.lazySingleton<_i461.PaintingsApi>(
       () => apiModule.getPaintingsApi(gh<_i361.Dio>()),
+    );
+    gh.factory<_i392.CreatePaintingCubit>(
+      () => _i392.CreatePaintingCubit(gh<_i519.FailureNotifier>()),
     );
     gh.lazySingleton<_i664.AuthService>(
       () => _i46.FirebaseAuthService(

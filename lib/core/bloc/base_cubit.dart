@@ -12,6 +12,8 @@ abstract class BaseCubit<State> extends Cubit<State> {
 
   final FailureNotifier _failureNotifier;
 
+  FailureNotifier get failureNotifier => _failureNotifier;
+
   Future<void> execute<T>({
     bool showSnackBarOnError = true,
     required Future<Either<Failure, T>> Function() useCase,
