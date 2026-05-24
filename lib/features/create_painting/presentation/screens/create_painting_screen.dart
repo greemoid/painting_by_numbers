@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paiting_by_numbers/core/ui/ui_kit/app_bar/common_app_bar.dart';
 import 'package:paiting_by_numbers/core/ui/widgets/ui_kit/app_button.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/create_painting/create_painting_cubit.dart';
-import 'package:paiting_by_numbers/features/create_painting/presentation/state/create_painting/create_painting_state.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/upload_image/upload_image_cubit.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/widgets/explanation_card.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/widgets/image_picker_area.dart';
@@ -41,19 +40,19 @@ class CreatePaintingScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const CreatePaintingExplanationCard(),
-              24.verticalSpace,
+              16.verticalSpace,
               ImagePickerArea(state: uploadState),
-              32.verticalSpace,
+              24.verticalSpace,
               QuantizationSettings(state: paintingState),
-              48.verticalSpace,
+              24.verticalSpace,
               AppButton(
                 text: LocaleKeys.create_painting_start_quantization.tr(),
                 isLoading: isQuantizing,
                 onPressed: !hasImage
                     ? null
                     : () => context
-                        .read<CreatePaintingCubit>()
-                        .startQuantization(),
+                          .read<CreatePaintingCubit>()
+                          .startQuantization(),
               ),
               160.verticalSpace,
             ],

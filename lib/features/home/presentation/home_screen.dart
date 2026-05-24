@@ -26,66 +26,69 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: colorScheme.background,
-      appBar: CommonAppBar(title: LocaleKeys.home_title.tr(), showBottomBorder: false),
-      body: CustomScrollView(
-        slivers: [
-          16.verticalSpace.toSliver(),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Container(
-                padding: EdgeInsets.all(4.r),
-                decoration: BoxDecoration(
-                  color: colorScheme.muted.withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.all(AppBorderRadiuses.rounded),
-                  border: Border.all(color: colorScheme.border),
+      appBar: CommonAppBar(
+        title: LocaleKeys.home_title.tr(),
+        showBottomBorder: false,
+      ),
+      body: Column(
+        children: [
+          16.verticalSpace,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Container(
+              padding: EdgeInsets.all(4.r),
+              decoration: BoxDecoration(
+                color: colorScheme.muted.withValues(alpha: 0.5),
+                borderRadius: BorderRadius.all(AppBorderRadiuses.rounded),
+                border: Border.all(color: colorScheme.border),
+              ),
+              child: ShadTabs<HomeTab>(
+                value: _currentTab,
+                onChanged: (v) => setState(() => _currentTab = v),
+                gap: 0,
+                contentConstraints: BoxConstraints.tight(Size.zero),
+                tabBarConstraints: BoxConstraints(maxWidth: 1.sw - 40.w),
+                decoration: const ShadDecoration(
+                  border: ShadBorder.none,
+                  color: Colors.transparent,
                 ),
-                child: ShadTabs<HomeTab>(
-                  value: _currentTab,
-                  onChanged: (v) => setState(() => _currentTab = v),
-                  gap: 0,
-                  contentConstraints: BoxConstraints.tight(Size.zero),
-                  tabBarConstraints: BoxConstraints(maxWidth: 1.sw - 40.w),
-                  decoration: const ShadDecoration(
-                    border: ShadBorder.none,
-                    color: Colors.transparent,
+                tabs: [
+                  ShadTab(
+                    value: HomeTab.myPaintings,
+                    child: Text(
+                      LocaleKeys.home_my_paintings.tr(),
+                      style: theme.textTheme.small.copyWith(
+                        fontWeight: FontWeight.w600,
+                        height: 1,
+                      ),
+                    ),
                   ),
-                  tabs: [
-                    ShadTab(
-                      value: HomeTab.myPaintings,
-                      child: Text(
-                        LocaleKeys.home_my_paintings.tr(),
-                        style: theme.textTheme.small.copyWith(
-                          fontWeight: FontWeight.w600,
-                          height: 1,
-                        ),
+                  ShadTab(
+                    value: HomeTab.explore,
+                    child: Text(
+                      LocaleKeys.home_explore.tr(),
+                      style: theme.textTheme.small.copyWith(
+                        fontWeight: FontWeight.w600,
+                        height: 1,
                       ),
                     ),
-                    ShadTab(
-                      value: HomeTab.explore,
-                      child: Text(
-                        LocaleKeys.home_explore.tr(),
-                        style: theme.textTheme.small.copyWith(
-                          fontWeight: FontWeight.w600,
-                          height: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
-          8.verticalSpace.toSliver(),
-          _currentTab == HomeTab.myPaintings
-              ? const PaintingsGrid()
-              : const ExplorePaintingsGrid(),
+          16.verticalSpace,
+          Expanded(
+            child: IndexedStack(
+              index: _currentTab == HomeTab.myPaintings ? 0 : 1,
+              children: const [
+                PaintingsGrid(),
+                ExplorePaintingsGrid(),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
-}
-
-extension on Widget {
-  Widget toSliver() => SliverToBoxAdapter(child: this);
 }

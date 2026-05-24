@@ -25,7 +25,7 @@ class QuantizationSettings extends StatelessWidget {
           LocaleKeys.create_painting_quantization_type.tr(),
           style: theme.textTheme.large.copyWith(fontWeight: FontWeight.w600),
         ),
-        16.verticalSpace,
+        10.verticalSpace,
         ShadSelect<QuantizationType>(
           placeholder: Text(
             LocaleKeys.create_painting_select_detail_level.tr(),
@@ -42,7 +42,7 @@ class QuantizationSettings extends StatelessWidget {
           ),
         ),
         if (state.quantizationType == QuantizationType.custom) ...[
-          24.verticalSpace,
+          16.verticalSpace,
           Text(
             LocaleKeys.create_painting_colors_count.tr(
               args: [state.customColorsCount.toString()],
