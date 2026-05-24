@@ -13,7 +13,6 @@ pub fn preprocess_image_internal(
     max_width: u32,
     blur_amount: f32, // sigma for gaussian blur
 ) -> Result<ProcessedImage> {
-    ("🧹 Preprocessing image...");
 
     let (width, height) = img.dimensions();
 
