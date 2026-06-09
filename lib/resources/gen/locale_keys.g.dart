@@ -62,6 +62,12 @@ abstract class  LocaleKeys {
   static const home_no_masterpieces_subtitle = 'home.no_masterpieces_subtitle';
   static const home_load_more_failed = 'home.load_more_failed';
   static const home_retry = 'home.retry';
+  static const home_technique = 'home.technique';
+  static const home_culture = 'home.culture';
+  static const home_dimensions = 'home.dimensions';
+  static const home_department = 'home.department';
+  static const home_biography = 'home.biography';
+  static const home_about_artwork = 'home.about_artwork';
   static const home = 'home';
   static const create_painting_title = 'create_painting.title';
   static const create_painting_explanation_title = 'create_painting.explanation_title';
@@ -75,6 +81,8 @@ abstract class  LocaleKeys {
   static const create_painting_type_custom = 'create_painting.type_custom';
   static const create_painting_colors_count = 'create_painting.colors_count';
   static const create_painting_start_quantization = 'create_painting.start_quantization';
+  static const create_painting_default_painting_name = 'create_painting.default_painting_name';
+  static const create_painting_default_artist = 'create_painting.default_artist';
   static const create_painting = 'create_painting';
 
 }

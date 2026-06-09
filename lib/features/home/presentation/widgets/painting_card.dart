@@ -11,6 +11,7 @@ class PaintingCard extends StatelessWidget {
   final String year;
   final String imageUrl;
   final double aspectRatio;
+  final VoidCallback? onTap;
 
   const PaintingCard({
     super.key,
@@ -19,6 +20,7 @@ class PaintingCard extends StatelessWidget {
     required this.year,
     required this.imageUrl,
     this.aspectRatio = 0.75,
+    this.onTap,
   });
 
   @override
@@ -27,35 +29,40 @@ class PaintingCard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(AppBorderRadiuses.roundedLg),
-          child: AspectRatio(
-            aspectRatio: aspectRatio,
-            child: CachedNetworkImage(
-              imageUrl: imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              placeholder: (context, url) => _PaintingShimmer(
-                baseColor: colorScheme.muted.withValues(alpha: 0.5),
-                highlightColor: colorScheme.muted,
-              ),
-              errorWidget: (context, url, error) => ColoredBox(
-                color: colorScheme.muted.withValues(alpha: 0.3),
-                child: Center(
-                  child: Icon(
-                    LucideIcons.imageOff,
-                    color: colorScheme.mutedForeground,
-                    size: 24.r,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.all(AppBorderRadiuses.roundedLg),
+            child: AspectRatio(
+              aspectRatio: aspectRatio,
+              child: Hero(
+                tag: imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  placeholder: (context, url) => _PaintingShimmer(
+                    baseColor: colorScheme.muted.withValues(alpha: 0.5),
+                    highlightColor: colorScheme.muted,
+                  ),
+                  errorWidget: (context, url, error) => ColoredBox(
+                    color: colorScheme.muted.withValues(alpha: 0.3),
+                    child: Center(
+                      child: Icon(
+                        LucideIcons.imageOff,
+                        color: colorScheme.mutedForeground,
+                        size: 24.r,
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-        4.verticalSpace,
+          4.verticalSpace,
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 4.w),
           child: Column(
@@ -100,8 +107,8 @@ class PaintingCard extends StatelessWidget {
             ],
           ),
         ),
-        8.verticalSpace,
-      ],
+        ],
+      ),
     );
   }
 }

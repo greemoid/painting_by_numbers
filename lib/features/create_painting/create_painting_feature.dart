@@ -14,13 +14,41 @@ class CreatePaintingFeature implements FeatureModule {
   List<RouteBase> get routes => [
     GoRoute(
       path: CreatePaintingRoutes.createPainting,
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => locator<UploadImageCubit>()),
-          BlocProvider(create: (_) => locator<CreatePaintingCubit>()),
-        ],
-        child: const CreatePaintingScreen(),
-      ),
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        final imageUrl = extra?['imageUrl'] as String?;
+        final title = extra?['title'] as String?;
+        final author = extra?['author'] as String?;
+        final year = extra?['year'] as String?;
+
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) {
+                final cubit = locator<UploadImageCubit>();
+                if (imageUrl != null) {
+                  cubit.setImageFromUrl(imageUrl);
+                }
+                return cubit;
+              },
+            ),
+            BlocProvider(
+              create: (_) {
+                final cubit = locator<CreatePaintingCubit>();
+                if (title != null || author != null || year != null) {
+                  cubit.setInitialMetadata(
+                    title: title,
+                    author: author,
+                    year: year,
+                  );
+                }
+                return cubit;
+              },
+            ),
+          ],
+          child: const CreatePaintingScreen(),
+        );
+      },
     ),
   ];
 }

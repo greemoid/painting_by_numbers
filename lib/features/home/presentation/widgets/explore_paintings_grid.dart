@@ -1,10 +1,13 @@
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:paiting_by_numbers/core/failures/failure.dart';
 import 'package:paiting_by_numbers/core/ui/ui_kit/loaders/app_loader.dart';
+import 'package:paiting_by_numbers/features/home/navigation/home_routes.dart';
 import 'package:paiting_by_numbers/features/home/presentation/state/explore_paintings_cubit.dart';
 import 'package:paiting_by_numbers/features/home/presentation/state/explore_paintings_state.dart';
 import 'package:paiting_by_numbers/features/home/presentation/widgets/painting_card.dart';
@@ -80,7 +83,7 @@ class _ExplorePaintingsGridState extends State<ExplorePaintingsGrid> {
               slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,
-                  child: Center(child: Text(e.failure.toString())),
+                  child: Center(child: Text(e.failure.messageKey.tr())),
                 ),
               ],
             ),
@@ -111,6 +114,10 @@ class _ExplorePaintingsGridState extends State<ExplorePaintingsGrid> {
                           year: items[index].year,
                           imageUrl: items[index].imageUrl,
                           aspectRatio: items[index].aspectRatio,
+                          onTap: () => context.push(
+                            HomeRoutes.paintingDetail,
+                            extra: items[index],
+                          ),
                         );
                       },
                     ),

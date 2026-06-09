@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paiting_by_numbers/app/ui/theme/borders/app_border_radiuses.dart';
 import 'package:paiting_by_numbers/core/ui/ui_kit/app_bar/common_app_bar.dart';
+import 'package:paiting_by_numbers/features/gallery/presentation/widgets/my_paintings_grid.dart';
 import 'package:paiting_by_numbers/features/home/presentation/widgets/explore_paintings_grid.dart';
-import 'package:paiting_by_numbers/features/home/presentation/widgets/paintings_grid.dart';
 import 'package:paiting_by_numbers/features/home/utils/home_tab.dart';
 import 'package:paiting_by_numbers/resources/gen/locale_keys.g.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: IndexedStack(
               index: _currentTab == HomeTab.myPaintings ? 0 : 1,
               children: [
-                const PaintingsGrid(),
+                const MyPaintingsGrid(),
                 _exploreTabVisited
                     ? const ExplorePaintingsGrid()
                     : const SizedBox.shrink(),

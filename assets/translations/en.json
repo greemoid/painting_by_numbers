@@ -61,7 +61,13 @@
         "no_masterpieces_title": "No Masterpieces Yet",
         "no_masterpieces_subtitle": "Browse historical artworks in the Explore tab, start coloring, and your completed paintings will appear here!",
         "load_more_failed": "Failed to load more paintings",
-        "retry": "Retry"
+        "retry": "Retry",
+        "technique": "Technique",
+        "culture": "Culture",
+        "dimensions": "Dimensions",
+        "department": "Department",
+        "biography": "Biography",
+        "about_artwork": "About Artwork"
     },
     "create_painting": {
         "title": "Turn Photo to Painting",
@@ -75,6 +81,8 @@
         "type_few": "Simple (Fewer colors, easier to paint)",
         "type_custom": "Custom (Adjust palette size)",
         "colors_count": "Palette size: {} colors",
-        "start_quantization": "Prepare Canvas"
+        "start_quantization": "Prepare Canvas",
+        "default_painting_name": "New Masterpiece",
+        "default_artist": "Unknown Artist"
     }
 }
