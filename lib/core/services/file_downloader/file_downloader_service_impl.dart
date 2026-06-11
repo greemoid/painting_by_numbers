@@ -18,9 +18,13 @@ class FileDownloaderServiceImpl implements FileDownloaderService {
     try {
       final tempDir = await getTemporaryDirectory();
       final uri = Uri.parse(url);
-      final extension = uri.pathSegments.isNotEmpty
-          ? uri.pathSegments.last.split('.').last
+      var extension = uri.pathSegments.isNotEmpty
+          ? uri.pathSegments.last.split('.').last.toLowerCase()
           : 'jpg';
+      const allowedExtensions = {'jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'};
+      if (!allowedExtensions.contains(extension)) {
+        extension = 'jpg';
+      }
       final fileName =
           'downloaded_${DateTime.now().millisecondsSinceEpoch}.$extension';
       final filePath = '${tempDir.path}/$fileName';
