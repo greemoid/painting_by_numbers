@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:dio/dio.dart' as _i361;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
@@ -17,6 +18,8 @@ import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:image_picker/image_picker.dart' as _i183;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:paiting_by_numbers/app/app_flow/app_flow_cubit.dart' as _i161;
+import 'package:paiting_by_numbers/app/app_flow/create_painting_flow_impl.dart'
+    as _i801;
 import 'package:paiting_by_numbers/app/app_flow/session/session_cubit.dart'
     as _i197;
 import 'package:paiting_by_numbers/app/app_flow/session/session_initializer.dart'
@@ -25,6 +28,8 @@ import 'package:paiting_by_numbers/app/app_flow/session/session_manager_impl.dar
     as _i143;
 import 'package:paiting_by_numbers/app/ui/theme/state/theme_cubit.dart'
     as _i747;
+import 'package:paiting_by_numbers/core/app_flow/create_painting_flow.dart'
+    as _i392;
 import 'package:paiting_by_numbers/core/app_flow/session/session_manager.dart'
     as _i685;
 import 'package:paiting_by_numbers/core/config/env_config.dart' as _i711;
@@ -33,10 +38,16 @@ import 'package:paiting_by_numbers/core/di/firebase_module.dart' as _i83;
 import 'package:paiting_by_numbers/core/di/modules/app_module.dart' as _i787;
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart'
     as _i519;
+import 'package:paiting_by_numbers/core/services/file_downloader/file_downloader_service.dart'
+    as _i774;
+import 'package:paiting_by_numbers/core/services/file_downloader/file_downloader_service_impl.dart'
+    as _i67;
 import 'package:paiting_by_numbers/core/services/file_picker/file_picker_service.dart'
     as _i954;
 import 'package:paiting_by_numbers/core/services/file_picker/file_picker_service_impl.dart'
     as _i351;
+import 'package:paiting_by_numbers/core/services/storage/file_storage_service.dart'
+    as _i80;
 import 'package:paiting_by_numbers/features/auth/navigation/data/repository/auth_repository_impl.dart'
     as _i602;
 import 'package:paiting_by_numbers/features/auth/navigation/data/services/auth_service.dart'
@@ -81,16 +92,30 @@ import 'package:paiting_by_numbers/features/create_painting/presentation/state/c
     as _i392;
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/upload_image/upload_image_cubit.dart'
     as _i112;
+import 'package:paiting_by_numbers/features/gallery/data/datasources/firestore_painting_data_source.dart'
+    as _i743;
+import 'package:paiting_by_numbers/features/gallery/data/repositories/painting_repository_impl.dart'
+    as _i122;
+import 'package:paiting_by_numbers/features/gallery/domain/repositories/painting_repository.dart'
+    as _i551;
+import 'package:paiting_by_numbers/features/gallery/domain/use_cases/save_generated_painting_use_case.dart'
+    as _i463;
+import 'package:paiting_by_numbers/features/gallery/presentation/state/my_paintings_cubit.dart'
+    as _i390;
 import 'package:paiting_by_numbers/features/home/data/api/paintings_api.dart'
     as _i461;
 import 'package:paiting_by_numbers/features/home/data/repositories/paintings_repository_impl.dart'
     as _i376;
 import 'package:paiting_by_numbers/features/home/domain/repositories/paintings_repository.dart'
     as _i419;
+import 'package:paiting_by_numbers/features/home/domain/use_cases/get_artwork_detail_use_case.dart'
+    as _i428;
 import 'package:paiting_by_numbers/features/home/domain/use_cases/get_highlighted_paintings_use_case.dart'
     as _i187;
 import 'package:paiting_by_numbers/features/home/presentation/state/explore_paintings_cubit.dart'
     as _i445;
+import 'package:paiting_by_numbers/features/home/presentation/state/painting_detail/painting_detail_cubit.dart'
+    as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -107,19 +132,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i711.EnvConfig>(() => _i711.EnvConfig.fromDotenv());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
     gh.lazySingleton<_i558.FlutterSecureStorage>(() => appModule.secureStorage);
     gh.lazySingleton<_i183.ImagePicker>(() => appModule.imagePicker);
     gh.lazySingleton<_i519.FailureNotifier>(() => _i519.FailureNotifier());
+    gh.lazySingleton<_i80.FileStorageService>(
+      () => const _i80.FileStorageService(),
+    );
     gh.lazySingleton<_i954.FilePickerService>(
       () => _i351.FilePickerServiceImpl(gh<_i183.ImagePicker>()),
     );
-    gh.factory<_i112.UploadImageCubit>(
-      () => _i112.UploadImageCubit(
-        gh<_i954.FilePickerService>(),
-        gh<_i519.FailureNotifier>(),
-      ),
-    );
     gh.lazySingleton<_i361.Dio>(() => apiModule.dio(gh<_i711.EnvConfig>()));
+    gh.lazySingleton<_i774.FileDownloaderService>(
+      () => _i67.FileDownloaderServiceImpl(gh<_i361.Dio>()),
+    );
     gh.lazySingleton<_i161.AppFlowCubit>(
       () => _i161.AppFlowCubit(gh<_i197.SessionCubit>()),
     );
@@ -129,17 +155,55 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i461.PaintingsApi>(
       () => apiModule.getPaintingsApi(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i392.CreatePaintingFlow>(
+      () => _i801.CreatePaintingFlowImpl(),
+    );
+    gh.lazySingleton<_i743.PaintingDataSource>(
+      () => _i743.FirestorePaintingDataSource(gh<_i974.FirebaseFirestore>()),
+    );
+    gh.factory<_i112.UploadImageCubit>(
+      () => _i112.UploadImageCubit(
+        gh<_i954.FilePickerService>(),
+        gh<_i774.FileDownloaderService>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
     gh.lazySingleton<_i664.AuthService>(
       () => _i46.FirebaseAuthService(
         gh<_i59.FirebaseAuth>(),
         gh<_i116.GoogleSignIn>(),
       ),
     );
+    gh.lazySingleton<_i551.PaintingRepository>(
+      () => _i122.PaintingRepositoryImpl(
+        gh<_i743.PaintingDataSource>(),
+        gh<_i80.FileStorageService>(),
+      ),
+    );
+    gh.factory<_i390.MyPaintingsCubit>(
+      () => _i390.MyPaintingsCubit(
+        gh<_i551.PaintingRepository>(),
+        gh<_i59.FirebaseAuth>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
     gh.factory<_i486.VectorizeImageUseCase>(
       () => _i486.VectorizeImageUseCase(gh<_i339.QuantizationRepository>()),
     );
+    gh.factory<_i463.SaveGeneratedPaintingUseCase>(
+      () => _i463.SaveGeneratedPaintingUseCase(gh<_i551.PaintingRepository>()),
+    );
     gh.lazySingleton<_i419.PaintingsRepository>(
       () => _i376.PaintingsRepositoryImpl(gh<_i461.PaintingsApi>()),
+    );
+    gh.factory<_i392.CreatePaintingCubit>(
+      () => _i392.CreatePaintingCubit(
+        gh<_i486.VectorizeImageUseCase>(),
+        gh<_i463.SaveGeneratedPaintingUseCase>(),
+        gh<_i80.FileStorageService>(),
+        gh<_i59.FirebaseAuth>(),
+        gh<_i519.FailureNotifier>(),
+      ),
     );
     gh.lazySingleton<_i729.AuthRepository>(
       () => _i602.AuthRepositoryImpl(gh<_i664.AuthService>()),
@@ -178,15 +242,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i519.FailureNotifier>(),
       ),
     );
+    gh.factory<_i428.GetArtworkDetailUseCase>(
+      () => _i428.GetArtworkDetailUseCase(gh<_i419.PaintingsRepository>()),
+    );
     gh.factory<_i187.GetHighlightedPaintingsUseCase>(
       () =>
           _i187.GetHighlightedPaintingsUseCase(gh<_i419.PaintingsRepository>()),
-    );
-    gh.factory<_i392.CreatePaintingCubit>(
-      () => _i392.CreatePaintingCubit(
-        gh<_i486.VectorizeImageUseCase>(),
-        gh<_i519.FailureNotifier>(),
-      ),
     );
     gh.lazySingleton<_i685.SessionManager>(
       () => _i143.SessionManagerImpl(
@@ -199,6 +260,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i709.ForgotPasswordCubit>(
       () => _i709.ForgotPasswordCubit(
         gh<_i602.SendPasswordResetLinkUseCase>(),
+        gh<_i519.FailureNotifier>(),
+      ),
+    );
+    gh.factory<_i460.PaintingDetailCubit>(
+      () => _i460.PaintingDetailCubit(
+        gh<_i428.GetArtworkDetailUseCase>(),
         gh<_i519.FailureNotifier>(),
       ),
     );

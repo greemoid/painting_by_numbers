@@ -1,17 +1,23 @@
+import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:paiting_by_numbers/core/bloc/base_cubit.dart';
 import 'package:paiting_by_numbers/core/failures/failure.dart';
 import 'package:paiting_by_numbers/core/services/failure_notifier/failure_notifier.dart';
+import 'package:paiting_by_numbers/core/services/file_downloader/file_downloader_service.dart';
 import 'package:paiting_by_numbers/core/services/file_picker/file_picker_service.dart';
 import 'package:paiting_by_numbers/features/create_painting/presentation/state/upload_image/upload_image_state.dart';
 
 @injectable
 class UploadImageCubit extends BaseCubit<UploadImageState> {
   final FilePickerService _filePickerService;
+  final FileDownloaderService _fileDownloaderService;
 
-  UploadImageCubit(this._filePickerService, FailureNotifier failureNotifier)
-    : super(const UploadImageState(), failureNotifier);
+  UploadImageCubit(
+    this._filePickerService,
+    this._fileDownloaderService,
+    FailureNotifier failureNotifier,
+  ) : super(const UploadImageState(), failureNotifier);
 
   Future<void> pickImage() async {
     await execute(
@@ -23,6 +29,14 @@ class UploadImageCubit extends BaseCubit<UploadImageState> {
           failureNotifier.notify(failure);
         }
       },
+    );
+  }
+
+  Future<void> setImageFromUrl(String imageUrl) async {
+    await execute(
+      useCase: () => _fileDownloaderService.downloadImage(imageUrl),
+      showSnackBarOnError: true,
+      onSuccess: (file) => safeEmit(state.copyWith(image: file)),
     );
   }
 

@@ -568,7 +568,7 @@ as int,
 /// @nodoc
 mixin _$PaintingModel {
 
- int get id;@JsonKey(name: 'accession_number') String get accessionNumber; String get title;@JsonKey(name: 'creation_date') String get creationDate;@JsonKey(name: 'creation_date_latest') int? get creationDateLatest; List<CreatorModel> get creators; PaintingImages get images; String? get description;
+ int get id;@JsonKey(name: 'accession_number') String get accessionNumber; String get title;@JsonKey(name: 'creation_date') String get creationDate;@JsonKey(name: 'creation_date_latest') int? get creationDateLatest; List<CreatorModel> get creators; PaintingImages? get images; String? get description; String? get technique; List<String>? get culture; String? get measurements; String? get department;
 /// Create a copy of PaintingModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -581,16 +581,16 @@ $PaintingModelCopyWith<PaintingModel> get copyWith => _$PaintingModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaintingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.accessionNumber, accessionNumber) || other.accessionNumber == accessionNumber)&&(identical(other.title, title) || other.title == title)&&(identical(other.creationDate, creationDate) || other.creationDate == creationDate)&&(identical(other.creationDateLatest, creationDateLatest) || other.creationDateLatest == creationDateLatest)&&const DeepCollectionEquality().equals(other.creators, creators)&&(identical(other.images, images) || other.images == images)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaintingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.accessionNumber, accessionNumber) || other.accessionNumber == accessionNumber)&&(identical(other.title, title) || other.title == title)&&(identical(other.creationDate, creationDate) || other.creationDate == creationDate)&&(identical(other.creationDateLatest, creationDateLatest) || other.creationDateLatest == creationDateLatest)&&const DeepCollectionEquality().equals(other.creators, creators)&&(identical(other.images, images) || other.images == images)&&(identical(other.description, description) || other.description == description)&&(identical(other.technique, technique) || other.technique == technique)&&const DeepCollectionEquality().equals(other.culture, culture)&&(identical(other.measurements, measurements) || other.measurements == measurements)&&(identical(other.department, department) || other.department == department));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,accessionNumber,title,creationDate,creationDateLatest,const DeepCollectionEquality().hash(creators),images,description);
+int get hashCode => Object.hash(runtimeType,id,accessionNumber,title,creationDate,creationDateLatest,const DeepCollectionEquality().hash(creators),images,description,technique,const DeepCollectionEquality().hash(culture),measurements,department);
 
 @override
 String toString() {
-  return 'PaintingModel(id: $id, accessionNumber: $accessionNumber, title: $title, creationDate: $creationDate, creationDateLatest: $creationDateLatest, creators: $creators, images: $images, description: $description)';
+  return 'PaintingModel(id: $id, accessionNumber: $accessionNumber, title: $title, creationDate: $creationDate, creationDateLatest: $creationDateLatest, creators: $creators, images: $images, description: $description, technique: $technique, culture: $culture, measurements: $measurements, department: $department)';
 }
 
 
@@ -601,11 +601,11 @@ abstract mixin class $PaintingModelCopyWith<$Res>  {
   factory $PaintingModelCopyWith(PaintingModel value, $Res Function(PaintingModel) _then) = _$PaintingModelCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'accession_number') String accessionNumber, String title,@JsonKey(name: 'creation_date') String creationDate,@JsonKey(name: 'creation_date_latest') int? creationDateLatest, List<CreatorModel> creators, PaintingImages images, String? description
+ int id,@JsonKey(name: 'accession_number') String accessionNumber, String title,@JsonKey(name: 'creation_date') String creationDate,@JsonKey(name: 'creation_date_latest') int? creationDateLatest, List<CreatorModel> creators, PaintingImages? images, String? description, String? technique, List<String>? culture, String? measurements, String? department
 });
 
 
-$PaintingImagesCopyWith<$Res> get images;
+$PaintingImagesCopyWith<$Res>? get images;
 
 }
 /// @nodoc
@@ -618,7 +618,7 @@ class _$PaintingModelCopyWithImpl<$Res>
 
 /// Create a copy of PaintingModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? accessionNumber = null,Object? title = null,Object? creationDate = null,Object? creationDateLatest = freezed,Object? creators = null,Object? images = null,Object? description = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? accessionNumber = null,Object? title = null,Object? creationDate = null,Object? creationDateLatest = freezed,Object? creators = null,Object? images = freezed,Object? description = freezed,Object? technique = freezed,Object? culture = freezed,Object? measurements = freezed,Object? department = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,accessionNumber: null == accessionNumber ? _self.accessionNumber : accessionNumber // ignore: cast_nullable_to_non_nullable
@@ -626,8 +626,12 @@ as String,title: null == title ? _self.title : title // ignore: cast_nullable_to
 as String,creationDate: null == creationDate ? _self.creationDate : creationDate // ignore: cast_nullable_to_non_nullable
 as String,creationDateLatest: freezed == creationDateLatest ? _self.creationDateLatest : creationDateLatest // ignore: cast_nullable_to_non_nullable
 as int?,creators: null == creators ? _self.creators : creators // ignore: cast_nullable_to_non_nullable
-as List<CreatorModel>,images: null == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
-as PaintingImages,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as List<CreatorModel>,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
+as PaintingImages?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,technique: freezed == technique ? _self.technique : technique // ignore: cast_nullable_to_non_nullable
+as String?,culture: freezed == culture ? _self.culture : culture // ignore: cast_nullable_to_non_nullable
+as List<String>?,measurements: freezed == measurements ? _self.measurements : measurements // ignore: cast_nullable_to_non_nullable
+as String?,department: freezed == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -635,9 +639,12 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PaintingImagesCopyWith<$Res> get images {
-  
-  return $PaintingImagesCopyWith<$Res>(_self.images, (value) {
+$PaintingImagesCopyWith<$Res>? get images {
+    if (_self.images == null) {
+    return null;
+  }
+
+  return $PaintingImagesCopyWith<$Res>(_self.images!, (value) {
     return _then(_self.copyWith(images: value));
   });
 }
@@ -722,10 +729,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'accession_number')  String accessionNumber,  String title, @JsonKey(name: 'creation_date')  String creationDate, @JsonKey(name: 'creation_date_latest')  int? creationDateLatest,  List<CreatorModel> creators,  PaintingImages images,  String? description)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'accession_number')  String accessionNumber,  String title, @JsonKey(name: 'creation_date')  String creationDate, @JsonKey(name: 'creation_date_latest')  int? creationDateLatest,  List<CreatorModel> creators,  PaintingImages? images,  String? description,  String? technique,  List<String>? culture,  String? measurements,  String? department)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PaintingModel() when $default != null:
-return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_that.creationDateLatest,_that.creators,_that.images,_that.description);case _:
+return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_that.creationDateLatest,_that.creators,_that.images,_that.description,_that.technique,_that.culture,_that.measurements,_that.department);case _:
   return orElse();
 
 }
@@ -743,10 +750,10 @@ return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'accession_number')  String accessionNumber,  String title, @JsonKey(name: 'creation_date')  String creationDate, @JsonKey(name: 'creation_date_latest')  int? creationDateLatest,  List<CreatorModel> creators,  PaintingImages images,  String? description)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'accession_number')  String accessionNumber,  String title, @JsonKey(name: 'creation_date')  String creationDate, @JsonKey(name: 'creation_date_latest')  int? creationDateLatest,  List<CreatorModel> creators,  PaintingImages? images,  String? description,  String? technique,  List<String>? culture,  String? measurements,  String? department)  $default,) {final _that = this;
 switch (_that) {
 case _PaintingModel():
-return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_that.creationDateLatest,_that.creators,_that.images,_that.description);case _:
+return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_that.creationDateLatest,_that.creators,_that.images,_that.description,_that.technique,_that.culture,_that.measurements,_that.department);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -763,10 +770,10 @@ return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'accession_number')  String accessionNumber,  String title, @JsonKey(name: 'creation_date')  String creationDate, @JsonKey(name: 'creation_date_latest')  int? creationDateLatest,  List<CreatorModel> creators,  PaintingImages images,  String? description)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'accession_number')  String accessionNumber,  String title, @JsonKey(name: 'creation_date')  String creationDate, @JsonKey(name: 'creation_date_latest')  int? creationDateLatest,  List<CreatorModel> creators,  PaintingImages? images,  String? description,  String? technique,  List<String>? culture,  String? measurements,  String? department)?  $default,) {final _that = this;
 switch (_that) {
 case _PaintingModel() when $default != null:
-return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_that.creationDateLatest,_that.creators,_that.images,_that.description);case _:
+return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_that.creationDateLatest,_that.creators,_that.images,_that.description,_that.technique,_that.culture,_that.measurements,_that.department);case _:
   return null;
 
 }
@@ -778,7 +785,7 @@ return $default(_that.id,_that.accessionNumber,_that.title,_that.creationDate,_t
 @JsonSerializable()
 
 class _PaintingModel implements PaintingModel {
-  const _PaintingModel({required this.id, @JsonKey(name: 'accession_number') required this.accessionNumber, required this.title, @JsonKey(name: 'creation_date') required this.creationDate, @JsonKey(name: 'creation_date_latest') this.creationDateLatest, required final  List<CreatorModel> creators, required this.images, this.description}): _creators = creators;
+  const _PaintingModel({required this.id, @JsonKey(name: 'accession_number') required this.accessionNumber, required this.title, @JsonKey(name: 'creation_date') required this.creationDate, @JsonKey(name: 'creation_date_latest') this.creationDateLatest, required final  List<CreatorModel> creators, this.images, this.description, this.technique, final  List<String>? culture, this.measurements, this.department}): _creators = creators,_culture = culture;
   factory _PaintingModel.fromJson(Map<String, dynamic> json) => _$PaintingModelFromJson(json);
 
 @override final  int id;
@@ -793,8 +800,20 @@ class _PaintingModel implements PaintingModel {
   return EqualUnmodifiableListView(_creators);
 }
 
-@override final  PaintingImages images;
+@override final  PaintingImages? images;
 @override final  String? description;
+@override final  String? technique;
+ final  List<String>? _culture;
+@override List<String>? get culture {
+  final value = _culture;
+  if (value == null) return null;
+  if (_culture is EqualUnmodifiableListView) return _culture;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+@override final  String? measurements;
+@override final  String? department;
 
 /// Create a copy of PaintingModel
 /// with the given fields replaced by the non-null parameter values.
@@ -809,16 +828,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaintingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.accessionNumber, accessionNumber) || other.accessionNumber == accessionNumber)&&(identical(other.title, title) || other.title == title)&&(identical(other.creationDate, creationDate) || other.creationDate == creationDate)&&(identical(other.creationDateLatest, creationDateLatest) || other.creationDateLatest == creationDateLatest)&&const DeepCollectionEquality().equals(other._creators, _creators)&&(identical(other.images, images) || other.images == images)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaintingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.accessionNumber, accessionNumber) || other.accessionNumber == accessionNumber)&&(identical(other.title, title) || other.title == title)&&(identical(other.creationDate, creationDate) || other.creationDate == creationDate)&&(identical(other.creationDateLatest, creationDateLatest) || other.creationDateLatest == creationDateLatest)&&const DeepCollectionEquality().equals(other._creators, _creators)&&(identical(other.images, images) || other.images == images)&&(identical(other.description, description) || other.description == description)&&(identical(other.technique, technique) || other.technique == technique)&&const DeepCollectionEquality().equals(other._culture, _culture)&&(identical(other.measurements, measurements) || other.measurements == measurements)&&(identical(other.department, department) || other.department == department));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,accessionNumber,title,creationDate,creationDateLatest,const DeepCollectionEquality().hash(_creators),images,description);
+int get hashCode => Object.hash(runtimeType,id,accessionNumber,title,creationDate,creationDateLatest,const DeepCollectionEquality().hash(_creators),images,description,technique,const DeepCollectionEquality().hash(_culture),measurements,department);
 
 @override
 String toString() {
-  return 'PaintingModel(id: $id, accessionNumber: $accessionNumber, title: $title, creationDate: $creationDate, creationDateLatest: $creationDateLatest, creators: $creators, images: $images, description: $description)';
+  return 'PaintingModel(id: $id, accessionNumber: $accessionNumber, title: $title, creationDate: $creationDate, creationDateLatest: $creationDateLatest, creators: $creators, images: $images, description: $description, technique: $technique, culture: $culture, measurements: $measurements, department: $department)';
 }
 
 
@@ -829,11 +848,11 @@ abstract mixin class _$PaintingModelCopyWith<$Res> implements $PaintingModelCopy
   factory _$PaintingModelCopyWith(_PaintingModel value, $Res Function(_PaintingModel) _then) = __$PaintingModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'accession_number') String accessionNumber, String title,@JsonKey(name: 'creation_date') String creationDate,@JsonKey(name: 'creation_date_latest') int? creationDateLatest, List<CreatorModel> creators, PaintingImages images, String? description
+ int id,@JsonKey(name: 'accession_number') String accessionNumber, String title,@JsonKey(name: 'creation_date') String creationDate,@JsonKey(name: 'creation_date_latest') int? creationDateLatest, List<CreatorModel> creators, PaintingImages? images, String? description, String? technique, List<String>? culture, String? measurements, String? department
 });
 
 
-@override $PaintingImagesCopyWith<$Res> get images;
+@override $PaintingImagesCopyWith<$Res>? get images;
 
 }
 /// @nodoc
@@ -846,7 +865,7 @@ class __$PaintingModelCopyWithImpl<$Res>
 
 /// Create a copy of PaintingModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? accessionNumber = null,Object? title = null,Object? creationDate = null,Object? creationDateLatest = freezed,Object? creators = null,Object? images = null,Object? description = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? accessionNumber = null,Object? title = null,Object? creationDate = null,Object? creationDateLatest = freezed,Object? creators = null,Object? images = freezed,Object? description = freezed,Object? technique = freezed,Object? culture = freezed,Object? measurements = freezed,Object? department = freezed,}) {
   return _then(_PaintingModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,accessionNumber: null == accessionNumber ? _self.accessionNumber : accessionNumber // ignore: cast_nullable_to_non_nullable
@@ -854,8 +873,12 @@ as String,title: null == title ? _self.title : title // ignore: cast_nullable_to
 as String,creationDate: null == creationDate ? _self.creationDate : creationDate // ignore: cast_nullable_to_non_nullable
 as String,creationDateLatest: freezed == creationDateLatest ? _self.creationDateLatest : creationDateLatest // ignore: cast_nullable_to_non_nullable
 as int?,creators: null == creators ? _self._creators : creators // ignore: cast_nullable_to_non_nullable
-as List<CreatorModel>,images: null == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
-as PaintingImages,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as List<CreatorModel>,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
+as PaintingImages?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,technique: freezed == technique ? _self.technique : technique // ignore: cast_nullable_to_non_nullable
+as String?,culture: freezed == culture ? _self._culture : culture // ignore: cast_nullable_to_non_nullable
+as List<String>?,measurements: freezed == measurements ? _self.measurements : measurements // ignore: cast_nullable_to_non_nullable
+as String?,department: freezed == department ? _self.department : department // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -864,10 +887,294 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PaintingImagesCopyWith<$Res> get images {
-  
-  return $PaintingImagesCopyWith<$Res>(_self.images, (value) {
+$PaintingImagesCopyWith<$Res>? get images {
+    if (_self.images == null) {
+    return null;
+  }
+
+  return $PaintingImagesCopyWith<$Res>(_self.images!, (value) {
     return _then(_self.copyWith(images: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$PaintingDetailResponse {
+
+ PaintingModel get data;
+/// Create a copy of PaintingDetailResponse
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaintingDetailResponseCopyWith<PaintingDetailResponse> get copyWith => _$PaintingDetailResponseCopyWithImpl<PaintingDetailResponse>(this as PaintingDetailResponse, _$identity);
+
+  /// Serializes this PaintingDetailResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaintingDetailResponse&&(identical(other.data, data) || other.data == data));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,data);
+
+@override
+String toString() {
+  return 'PaintingDetailResponse(data: $data)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $PaintingDetailResponseCopyWith<$Res>  {
+  factory $PaintingDetailResponseCopyWith(PaintingDetailResponse value, $Res Function(PaintingDetailResponse) _then) = _$PaintingDetailResponseCopyWithImpl;
+@useResult
+$Res call({
+ PaintingModel data
+});
+
+
+$PaintingModelCopyWith<$Res> get data;
+
+}
+/// @nodoc
+class _$PaintingDetailResponseCopyWithImpl<$Res>
+    implements $PaintingDetailResponseCopyWith<$Res> {
+  _$PaintingDetailResponseCopyWithImpl(this._self, this._then);
+
+  final PaintingDetailResponse _self;
+  final $Res Function(PaintingDetailResponse) _then;
+
+/// Create a copy of PaintingDetailResponse
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? data = null,}) {
+  return _then(_self.copyWith(
+data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as PaintingModel,
+  ));
+}
+/// Create a copy of PaintingDetailResponse
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaintingModelCopyWith<$Res> get data {
+  
+  return $PaintingModelCopyWith<$Res>(_self.data, (value) {
+    return _then(_self.copyWith(data: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [PaintingDetailResponse].
+extension PaintingDetailResponsePatterns on PaintingDetailResponse {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PaintingDetailResponse value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PaintingDetailResponse() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PaintingDetailResponse value)  $default,){
+final _that = this;
+switch (_that) {
+case _PaintingDetailResponse():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PaintingDetailResponse value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PaintingDetailResponse() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PaintingModel data)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PaintingDetailResponse() when $default != null:
+return $default(_that.data);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PaintingModel data)  $default,) {final _that = this;
+switch (_that) {
+case _PaintingDetailResponse():
+return $default(_that.data);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PaintingModel data)?  $default,) {final _that = this;
+switch (_that) {
+case _PaintingDetailResponse() when $default != null:
+return $default(_that.data);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _PaintingDetailResponse implements PaintingDetailResponse {
+  const _PaintingDetailResponse({required this.data});
+  factory _PaintingDetailResponse.fromJson(Map<String, dynamic> json) => _$PaintingDetailResponseFromJson(json);
+
+@override final  PaintingModel data;
+
+/// Create a copy of PaintingDetailResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PaintingDetailResponseCopyWith<_PaintingDetailResponse> get copyWith => __$PaintingDetailResponseCopyWithImpl<_PaintingDetailResponse>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$PaintingDetailResponseToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaintingDetailResponse&&(identical(other.data, data) || other.data == data));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,data);
+
+@override
+String toString() {
+  return 'PaintingDetailResponse(data: $data)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PaintingDetailResponseCopyWith<$Res> implements $PaintingDetailResponseCopyWith<$Res> {
+  factory _$PaintingDetailResponseCopyWith(_PaintingDetailResponse value, $Res Function(_PaintingDetailResponse) _then) = __$PaintingDetailResponseCopyWithImpl;
+@override @useResult
+$Res call({
+ PaintingModel data
+});
+
+
+@override $PaintingModelCopyWith<$Res> get data;
+
+}
+/// @nodoc
+class __$PaintingDetailResponseCopyWithImpl<$Res>
+    implements _$PaintingDetailResponseCopyWith<$Res> {
+  __$PaintingDetailResponseCopyWithImpl(this._self, this._then);
+
+  final _PaintingDetailResponse _self;
+  final $Res Function(_PaintingDetailResponse) _then;
+
+/// Create a copy of PaintingDetailResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? data = null,}) {
+  return _then(_PaintingDetailResponse(
+data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as PaintingModel,
+  ));
+}
+
+/// Create a copy of PaintingDetailResponse
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaintingModelCopyWith<$Res> get data {
+  
+  return $PaintingModelCopyWith<$Res>(_self.data, (value) {
+    return _then(_self.copyWith(data: value));
   });
 }
 }
@@ -1145,7 +1452,7 @@ as String?,
 /// @nodoc
 mixin _$PaintingImages {
 
- PaintingImageSize get web; PaintingImageSize? get print; PaintingImageSize? get full;
+ PaintingImageSize? get web; PaintingImageSize? get print; PaintingImageSize? get full;
 /// Create a copy of PaintingImages
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1178,11 +1485,11 @@ abstract mixin class $PaintingImagesCopyWith<$Res>  {
   factory $PaintingImagesCopyWith(PaintingImages value, $Res Function(PaintingImages) _then) = _$PaintingImagesCopyWithImpl;
 @useResult
 $Res call({
- PaintingImageSize web, PaintingImageSize? print, PaintingImageSize? full
+ PaintingImageSize? web, PaintingImageSize? print, PaintingImageSize? full
 });
 
 
-$PaintingImageSizeCopyWith<$Res> get web;$PaintingImageSizeCopyWith<$Res>? get print;$PaintingImageSizeCopyWith<$Res>? get full;
+$PaintingImageSizeCopyWith<$Res>? get web;$PaintingImageSizeCopyWith<$Res>? get print;$PaintingImageSizeCopyWith<$Res>? get full;
 
 }
 /// @nodoc
@@ -1195,10 +1502,10 @@ class _$PaintingImagesCopyWithImpl<$Res>
 
 /// Create a copy of PaintingImages
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? web = null,Object? print = freezed,Object? full = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? web = freezed,Object? print = freezed,Object? full = freezed,}) {
   return _then(_self.copyWith(
-web: null == web ? _self.web : web // ignore: cast_nullable_to_non_nullable
-as PaintingImageSize,print: freezed == print ? _self.print : print // ignore: cast_nullable_to_non_nullable
+web: freezed == web ? _self.web : web // ignore: cast_nullable_to_non_nullable
+as PaintingImageSize?,print: freezed == print ? _self.print : print // ignore: cast_nullable_to_non_nullable
 as PaintingImageSize?,full: freezed == full ? _self.full : full // ignore: cast_nullable_to_non_nullable
 as PaintingImageSize?,
   ));
@@ -1207,9 +1514,12 @@ as PaintingImageSize?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PaintingImageSizeCopyWith<$Res> get web {
-  
-  return $PaintingImageSizeCopyWith<$Res>(_self.web, (value) {
+$PaintingImageSizeCopyWith<$Res>? get web {
+    if (_self.web == null) {
+    return null;
+  }
+
+  return $PaintingImageSizeCopyWith<$Res>(_self.web!, (value) {
     return _then(_self.copyWith(web: value));
   });
 }/// Create a copy of PaintingImages
@@ -1318,7 +1628,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PaintingImageSize web,  PaintingImageSize? print,  PaintingImageSize? full)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PaintingImageSize? web,  PaintingImageSize? print,  PaintingImageSize? full)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PaintingImages() when $default != null:
 return $default(_that.web,_that.print,_that.full);case _:
@@ -1339,7 +1649,7 @@ return $default(_that.web,_that.print,_that.full);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PaintingImageSize web,  PaintingImageSize? print,  PaintingImageSize? full)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PaintingImageSize? web,  PaintingImageSize? print,  PaintingImageSize? full)  $default,) {final _that = this;
 switch (_that) {
 case _PaintingImages():
 return $default(_that.web,_that.print,_that.full);case _:
@@ -1359,7 +1669,7 @@ return $default(_that.web,_that.print,_that.full);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PaintingImageSize web,  PaintingImageSize? print,  PaintingImageSize? full)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PaintingImageSize? web,  PaintingImageSize? print,  PaintingImageSize? full)?  $default,) {final _that = this;
 switch (_that) {
 case _PaintingImages() when $default != null:
 return $default(_that.web,_that.print,_that.full);case _:
@@ -1374,10 +1684,10 @@ return $default(_that.web,_that.print,_that.full);case _:
 @JsonSerializable()
 
 class _PaintingImages implements PaintingImages {
-  const _PaintingImages({required this.web, this.print, this.full});
+  const _PaintingImages({this.web, this.print, this.full});
   factory _PaintingImages.fromJson(Map<String, dynamic> json) => _$PaintingImagesFromJson(json);
 
-@override final  PaintingImageSize web;
+@override final  PaintingImageSize? web;
 @override final  PaintingImageSize? print;
 @override final  PaintingImageSize? full;
 
@@ -1414,11 +1724,11 @@ abstract mixin class _$PaintingImagesCopyWith<$Res> implements $PaintingImagesCo
   factory _$PaintingImagesCopyWith(_PaintingImages value, $Res Function(_PaintingImages) _then) = __$PaintingImagesCopyWithImpl;
 @override @useResult
 $Res call({
- PaintingImageSize web, PaintingImageSize? print, PaintingImageSize? full
+ PaintingImageSize? web, PaintingImageSize? print, PaintingImageSize? full
 });
 
 
-@override $PaintingImageSizeCopyWith<$Res> get web;@override $PaintingImageSizeCopyWith<$Res>? get print;@override $PaintingImageSizeCopyWith<$Res>? get full;
+@override $PaintingImageSizeCopyWith<$Res>? get web;@override $PaintingImageSizeCopyWith<$Res>? get print;@override $PaintingImageSizeCopyWith<$Res>? get full;
 
 }
 /// @nodoc
@@ -1431,10 +1741,10 @@ class __$PaintingImagesCopyWithImpl<$Res>
 
 /// Create a copy of PaintingImages
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? web = null,Object? print = freezed,Object? full = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? web = freezed,Object? print = freezed,Object? full = freezed,}) {
   return _then(_PaintingImages(
-web: null == web ? _self.web : web // ignore: cast_nullable_to_non_nullable
-as PaintingImageSize,print: freezed == print ? _self.print : print // ignore: cast_nullable_to_non_nullable
+web: freezed == web ? _self.web : web // ignore: cast_nullable_to_non_nullable
+as PaintingImageSize?,print: freezed == print ? _self.print : print // ignore: cast_nullable_to_non_nullable
 as PaintingImageSize?,full: freezed == full ? _self.full : full // ignore: cast_nullable_to_non_nullable
 as PaintingImageSize?,
   ));
@@ -1444,9 +1754,12 @@ as PaintingImageSize?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PaintingImageSizeCopyWith<$Res> get web {
-  
-  return $PaintingImageSizeCopyWith<$Res>(_self.web, (value) {
+$PaintingImageSizeCopyWith<$Res>? get web {
+    if (_self.web == null) {
+    return null;
+  }
+
+  return $PaintingImageSizeCopyWith<$Res>(_self.web!, (value) {
     return _then(_self.copyWith(web: value));
   });
 }/// Create a copy of PaintingImages

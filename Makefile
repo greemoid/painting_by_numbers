@@ -15,4 +15,4 @@ locale:
 	fvm dart run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir ./assets/translations --output-dir ./lib/resources/gen
 
 apk:
-	fvm flutter build apk --flavor prod --target-platform android-arm64
+	fvm flutter build apk --target-platform android-arm64

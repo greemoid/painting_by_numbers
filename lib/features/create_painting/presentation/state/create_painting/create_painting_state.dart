@@ -11,5 +11,8 @@ abstract class CreatePaintingState with _$CreatePaintingState {
     @Default(25) int customColorsCount,
     @Default(false) bool isQuantizing,
     QuantizationResult? quantizationResult,
+    String? initialTitle,
+    String? initialAuthor,
+    int? initialYear,
   }) = _CreatePaintingState;
 }

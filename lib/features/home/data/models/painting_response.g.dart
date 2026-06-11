@@ -33,8 +33,16 @@ _PaintingModel _$PaintingModelFromJson(Map<String, dynamic> json) =>
       creators: (json['creators'] as List<dynamic>)
           .map((e) => CreatorModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      images: PaintingImages.fromJson(json['images'] as Map<String, dynamic>),
+      images: json['images'] == null
+          ? null
+          : PaintingImages.fromJson(json['images'] as Map<String, dynamic>),
       description: json['description'] as String?,
+      technique: json['technique'] as String?,
+      culture: (json['culture'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      measurements: json['measurements'] as String?,
+      department: json['department'] as String?,
     );
 
 Map<String, dynamic> _$PaintingModelToJson(_PaintingModel instance) =>
@@ -47,7 +55,21 @@ Map<String, dynamic> _$PaintingModelToJson(_PaintingModel instance) =>
       'creators': instance.creators,
       'images': instance.images,
       'description': instance.description,
+      'technique': instance.technique,
+      'culture': instance.culture,
+      'measurements': instance.measurements,
+      'department': instance.department,
     };
+
+_PaintingDetailResponse _$PaintingDetailResponseFromJson(
+  Map<String, dynamic> json,
+) => _PaintingDetailResponse(
+  data: PaintingModel.fromJson(json['data'] as Map<String, dynamic>),
+);
+
+Map<String, dynamic> _$PaintingDetailResponseToJson(
+  _PaintingDetailResponse instance,
+) => <String, dynamic>{'data': instance.data};
 
 _CreatorModel _$CreatorModelFromJson(Map<String, dynamic> json) =>
     _CreatorModel(
@@ -65,7 +87,9 @@ Map<String, dynamic> _$CreatorModelToJson(_CreatorModel instance) =>
 
 _PaintingImages _$PaintingImagesFromJson(Map<String, dynamic> json) =>
     _PaintingImages(
-      web: PaintingImageSize.fromJson(json['web'] as Map<String, dynamic>),
+      web: json['web'] == null
+          ? null
+          : PaintingImageSize.fromJson(json['web'] as Map<String, dynamic>),
       print: json['print'] == null
           ? null
           : PaintingImageSize.fromJson(json['print'] as Map<String, dynamic>),

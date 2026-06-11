@@ -15,4 +15,7 @@ abstract class PaintingsApi {
     @Query('skip') int skip = 0,
     @Query('limit') int limit = 20,
   });
+
+  @GET('artworks/{id}')
+  Future<PaintingDetailResponse> getArtworkDetail(@Path('id') int id);
 }

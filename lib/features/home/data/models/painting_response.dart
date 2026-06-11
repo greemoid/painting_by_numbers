@@ -31,12 +31,26 @@ abstract class PaintingModel with _$PaintingModel {
     @JsonKey(name: 'creation_date') required String creationDate,
     @JsonKey(name: 'creation_date_latest') int? creationDateLatest,
     required List<CreatorModel> creators,
-    required PaintingImages images,
+    PaintingImages? images,
     String? description,
+    String? technique,
+    List<String>? culture,
+    String? measurements,
+    String? department,
   }) = _PaintingModel;
 
   factory PaintingModel.fromJson(Map<String, dynamic> json) =>
       _$PaintingModelFromJson(json);
+}
+
+@freezed
+abstract class PaintingDetailResponse with _$PaintingDetailResponse {
+  const factory PaintingDetailResponse({
+    required PaintingModel data,
+  }) = _PaintingDetailResponse;
+
+  factory PaintingDetailResponse.fromJson(Map<String, dynamic> json) =>
+      _$PaintingDetailResponseFromJson(json);
 }
 
 @freezed
@@ -54,7 +68,7 @@ abstract class CreatorModel with _$CreatorModel {
 @freezed
 abstract class PaintingImages with _$PaintingImages {
   const factory PaintingImages({
-    required PaintingImageSize web,
+    PaintingImageSize? web,
     PaintingImageSize? print,
     PaintingImageSize? full,
   }) = _PaintingImages;
