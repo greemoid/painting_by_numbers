@@ -168,13 +168,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i519.FailureNotifier>(),
       ),
     );
-    gh.lazySingleton<_i551.PaintingRepository>(
-      () => _i122.PaintingRepositoryImpl(gh<_i743.PaintingDataSource>()),
-    );
     gh.lazySingleton<_i664.AuthService>(
       () => _i46.FirebaseAuthService(
         gh<_i59.FirebaseAuth>(),
         gh<_i116.GoogleSignIn>(),
+      ),
+    );
+    gh.lazySingleton<_i551.PaintingRepository>(
+      () => _i122.PaintingRepositoryImpl(
+        gh<_i743.PaintingDataSource>(),
+        gh<_i80.FileStorageService>(),
       ),
     );
     gh.factory<_i390.MyPaintingsCubit>(

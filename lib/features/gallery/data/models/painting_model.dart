@@ -34,7 +34,7 @@ class GeneratedPaintingModel extends GeneratedPaintingEntity {
       'name': name,
       'artist': artist,
       'year': year,
-      'localImagePath': localImagePath,
+      'localImagePath': localImagePath.split(RegExp(r'[/\\]')).last,
       'colors': colors,
       'createdAt': Timestamp.fromDate(createdAt),
     };

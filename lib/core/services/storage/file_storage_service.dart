@@ -16,4 +16,12 @@ class FileStorageService {
     await file.writeAsString(content);
     return file.path;
   }
+
+  /// Returns the absolute path for a given filename inside the documents directory.
+  /// If the filename is already an absolute path (backward compatibility), it returns it as is.
+  Future<String> getAbsolutePath(String fileName) async {
+    if (fileName.contains('/')) return fileName;
+    final directory = await getApplicationDocumentsDirectory();
+    return '${directory.path}/$fileName';
+  }
 }
