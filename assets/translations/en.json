@@ -67,7 +67,8 @@
         "dimensions": "Dimensions",
         "department": "Department",
         "biography": "Biography",
-        "about_artwork": "About Artwork"
+        "about_artwork": "About Artwork",
+        "details": "Details"
     },
     "create_painting": {
         "title": "Turn Photo to Painting",

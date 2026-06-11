@@ -185,6 +185,11 @@ class _PaintingDetailScreenState extends State<PaintingDetailScreen> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
+    final hasDetails = detail.technique != null ||
+        (detail.culture != null && detail.culture!.isNotEmpty) ||
+        detail.measurements != null ||
+        detail.department != null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -215,49 +220,52 @@ class _PaintingDetailScreenState extends State<PaintingDetailScreen> {
           ),
           20.verticalSpace,
         ],
-        Text(
-          LocaleKeys.create_painting_explanation_title.tr(),
-          style: textTheme.h3.copyWith(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
+
+        if (hasDetails) ...[
+          Text(
+            LocaleKeys.home_details.tr(),
+            style: textTheme.h3.copyWith(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        8.verticalSpace,
-        Table(
-          border: TableBorder.symmetric(
-            inside: BorderSide(color: colorScheme.border, width: 0.5),
+          8.verticalSpace,
+          Table(
+            border: TableBorder.symmetric(
+              inside: BorderSide(color: colorScheme.border, width: 0.5),
+            ),
+            columnWidths: const {
+              0: FlexColumnWidth(1),
+              1: FlexColumnWidth(2),
+            },
+            children: [
+              if (detail.technique != null)
+                _buildTableRow(
+                  LocaleKeys.home_technique.tr(),
+                  detail.technique!,
+                  context,
+                ),
+              if (detail.culture != null && detail.culture!.isNotEmpty)
+                _buildTableRow(
+                  LocaleKeys.home_culture.tr(),
+                  detail.culture!.join(', '),
+                  context,
+                ),
+              if (detail.measurements != null)
+                _buildTableRow(
+                  LocaleKeys.home_dimensions.tr(),
+                  detail.measurements!,
+                  context,
+                ),
+              if (detail.department != null)
+                _buildTableRow(
+                  LocaleKeys.home_department.tr(),
+                  detail.department!,
+                  context,
+                ),
+            ],
           ),
-          columnWidths: const {
-            0: FlexColumnWidth(1),
-            1: FlexColumnWidth(2),
-          },
-          children: [
-            if (detail.technique != null)
-              _buildTableRow(
-                LocaleKeys.home_technique.tr(),
-                detail.technique!,
-                context,
-              ),
-            if (detail.culture != null && detail.culture!.isNotEmpty)
-              _buildTableRow(
-                LocaleKeys.home_culture.tr(),
-                detail.culture!.join(', '),
-                context,
-              ),
-            if (detail.measurements != null)
-              _buildTableRow(
-                LocaleKeys.home_dimensions.tr(),
-                detail.measurements!,
-                context,
-              ),
-            if (detail.department != null)
-              _buildTableRow(
-                LocaleKeys.home_department.tr(),
-                detail.department!,
-                context,
-              ),
-          ],
-        ),
+        ],
         if (detail.authorBiography != null &&
             detail.authorBiography!.isNotEmpty) ...[
           20.verticalSpace,

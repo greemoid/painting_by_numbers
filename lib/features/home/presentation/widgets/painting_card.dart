@@ -34,12 +34,12 @@ class PaintingCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.all(AppBorderRadiuses.roundedLg),
-            child: AspectRatio(
-              aspectRatio: aspectRatio,
-              child: Hero(
-                tag: imageUrl,
+          Hero(
+            tag: imageUrl,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(AppBorderRadiuses.roundedLg),
+              child: AspectRatio(
+                aspectRatio: aspectRatio,
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   fit: BoxFit.cover,

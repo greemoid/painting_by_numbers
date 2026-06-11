@@ -27,9 +27,8 @@ class ImagePickerArea extends StatelessWidget {
             borderRadius: BorderRadius.all(AppBorderRadiuses.rounded),
             child: Image.file(
               state.image!,
-              height: 250.h,
               width: double.infinity,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitWidth,
             ),
           ),
           16.verticalSpace,

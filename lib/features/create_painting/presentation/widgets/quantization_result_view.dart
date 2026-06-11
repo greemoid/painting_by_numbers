@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paiting_by_numbers/features/create_painting/domain/entities/quantization_result.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -22,15 +23,21 @@ class QuantizationResultView extends StatelessWidget {
           style: theme.textTheme.large.copyWith(fontWeight: FontWeight.w600),
         ),
         16.verticalSpace,
-        Container(
-          height: 320.h,
-          decoration: BoxDecoration(
-            color: colorScheme.muted,
-            borderRadius: BorderRadius.circular(16.r),
-            border: Border.all(color: colorScheme.border),
+        AspectRatio(
+          aspectRatio: _parseSvgAspectRatio(result.svgContent),
+          child: Container(
+            decoration: BoxDecoration(
+              color: colorScheme.muted,
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: colorScheme.border),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: SvgPicture.string(
+              result.svgContent,
+              width: double.infinity,
+              fit: BoxFit.fitWidth,
+            ),
           ),
-          clipBehavior: Clip.antiAlias,
-          child: SvgPicture.string(result.svgContent, fit: BoxFit.contain),
         ),
         24.verticalSpace,
         Text(
@@ -104,4 +111,30 @@ class _PaletteChip extends StatelessWidget {
       ),
     );
   }
+}
+
+double _parseSvgAspectRatio(String svg) {
+  try {
+    final viewBoxRegex = RegExp(r'viewBox="([^"]+)"');
+    final viewBoxMatch = viewBoxRegex.firstMatch(svg);
+    if (viewBoxMatch != null) {
+      final parts = viewBoxMatch.group(1)!.trim().split(RegExp(r'\s+'));
+      if (parts.length == 4) {
+        final w = double.tryParse(parts[2]) ?? 0.0;
+        final h = double.tryParse(parts[3]) ?? 0.0;
+        if (w > 0 && h > 0) return w / h;
+      }
+    }
+
+    final widthRegex = RegExp(r'width="([^"]+)"');
+    final heightRegex = RegExp(r'height="([^"]+)"');
+    final wMatch = widthRegex.firstMatch(svg);
+    final hMatch = heightRegex.firstMatch(svg);
+    if (wMatch != null && hMatch != null) {
+      final w = double.tryParse(wMatch.group(1)!) ?? 0.0;
+      final h = double.tryParse(hMatch.group(1)!) ?? 0.0;
+      if (w > 0 && h > 0) return w / h;
+    }
+  } catch (_) {}
+  return 1.0;
 }

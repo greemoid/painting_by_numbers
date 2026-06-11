@@ -67,7 +67,8 @@
         "dimensions": "Розміри",
         "department": "Департамент",
         "biography": "Біографія",
-        "about_artwork": "Про шедевр"
+        "about_artwork": "Про шедевр",
+        "details": "Характеристики"
     },
     "create_painting": {
         "title": "Перетворити фото на картину",

@@ -68,6 +68,7 @@ abstract class  LocaleKeys {
   static const home_department = 'home.department';
   static const home_biography = 'home.biography';
   static const home_about_artwork = 'home.about_artwork';
+  static const home_details = 'home.details';
   static const home = 'home';
   static const create_painting_title = 'create_painting.title';
   static const create_painting_explanation_title = 'create_painting.explanation_title';
