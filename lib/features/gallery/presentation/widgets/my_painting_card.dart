@@ -34,20 +34,37 @@ class MyPaintingCard extends StatelessWidget {
           borderRadius: BorderRadius.all(AppBorderRadiuses.roundedLg),
           child: AspectRatio(
             aspectRatio: aspectRatio,
-            child: SvgPicture.file(
-              File(localImagePath),
-              fit: BoxFit.cover,
-              width: double.infinity,
-              placeholderBuilder: (context) => ColoredBox(
-                color: colorScheme.muted.withValues(alpha: 0.3),
-                child: Center(
-                  child: Icon(
-                    LucideIcons.image,
-                    color: colorScheme.mutedForeground,
-                    size: 24.r,
+            child: Builder(
+              builder: (context) {
+                final file = File(localImagePath);
+                if (!file.existsSync()) {
+                  return ColoredBox(
+                    color: colorScheme.muted.withValues(alpha: 0.3),
+                    child: Center(
+                      child: Icon(
+                        LucideIcons.imageOff,
+                        color: colorScheme.mutedForeground,
+                        size: 24.r,
+                      ),
+                    ),
+                  );
+                }
+                return SvgPicture.file(
+                  file,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  placeholderBuilder: (context) => ColoredBox(
+                    color: colorScheme.muted.withValues(alpha: 0.3),
+                    child: Center(
+                      child: Icon(
+                        LucideIcons.image,
+                        color: colorScheme.mutedForeground,
+                        size: 24.r,
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ),
