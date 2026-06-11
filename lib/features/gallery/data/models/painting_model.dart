@@ -14,16 +14,17 @@ class GeneratedPaintingModel extends GeneratedPaintingEntity {
   });
 
   factory GeneratedPaintingModel.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+    final data = doc.data() as Map<String, dynamic>?;
+    final createdAtValue = data?['createdAt'];
     return GeneratedPaintingModel(
       id: doc.id,
-      networkId: data['networkId'] as String?,
-      name: data['name'] ?? '',
-      artist: data['artist'] ?? '',
-      year: data['year'] ?? 0,
-      localImagePath: data['localImagePath'] ?? '',
-      colors: List<String>.from(data['colors'] ?? []),
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
+      networkId: data?['networkId'] as String?,
+      name: data?['name'] as String? ?? '',
+      artist: data?['artist'] as String? ?? '',
+      year: data?['year'] as int? ?? 0,
+      localImagePath: data?['localImagePath'] as String? ?? '',
+      colors: List<String>.from(data?['colors'] as List? ?? []),
+      createdAt: createdAtValue is Timestamp ? createdAtValue.toDate() : DateTime.now(),
     );
   }
 
