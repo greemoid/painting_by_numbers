@@ -1,3 +1,5 @@
+
+
 <div align="center">
   <h1>🎨 Painting by Numbers</h1>
   <p>
@@ -5,10 +7,24 @@
   </p>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 🎥 App Preview
 <!-- TODO: Add your preview video link or GIF here -->
 <div align="center">
-  <img src="https://via.placeholder.com/800x400.png?text=App+Preview+Video/GIF" alt="App Preview" width="800" />
+  <video src="https://github.com/user-attachments/assets/7b02a160-c0a9-4d27-b9e7-eed8624a8a19" width="600" controls />
 </div>
 
 ---
